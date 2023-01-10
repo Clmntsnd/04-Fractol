@@ -58,12 +58,12 @@ int32_t	main(void)
 	memset(g_img->pixels, 155, g_img->width * g_img->height * sizeof(int)); 
 	
 	//put the image onto the window
-	mlx_image_to_window(mlx, g_img, 0, 0); 
+	mlx_image_to_window(mlx, g_img, 0, 0);
 	
 	//put the image onto the window
 	mlx_loop_hook(mlx, &hook, mlx);
 
-	// 
+	// function that keeps the windo open
 	mlx_loop(mlx);
 
 	mlx_terminate(mlx);
