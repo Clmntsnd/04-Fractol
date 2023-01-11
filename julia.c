@@ -83,8 +83,9 @@ void	ft_julia(mlx_image_t* img)
 	ymax = 1.5;
 	max_iter = 10000;
 
-	c_re = -0.7;
-	c_im = 0.27015;
+	c_re = 0.285;
+	c_im = -0.01;
+	//0.285 + 0.01i
 
 	i = 0;
 	while (i < WIDTH)

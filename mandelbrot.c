@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <memory.h>
+#include <math.h>
 #define WIDTH 1200	
 #define HEIGHT 800
 
@@ -11,6 +12,11 @@ static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
+}
+
+int get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a);
 }
 
 /*
@@ -58,7 +64,7 @@ t_fr_data *get_data()
 		fr_data->xmax = 1;
 		fr_data->ymin = -1;
 		fr_data->ymax = 1;
-		fr_data->max_iter = 25;
+		fr_data->max_iter = 128;
 	}
 	return (fr_data);
 }
@@ -104,6 +110,20 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	}
 }
 
+int set_color(int c)
+{
+	int color;
+
+	color = 0;
+	if (c < 50)
+		color = get_rgba(255, 255, 255, 255);
+	else if (c >= 50 && c <=100)
+		color = get_rgba(255, 0, 255, 255);
+	else
+		color = get_rgba(0, 0, 0, 255);
+	return (color);
+}
+
 
 void	ft_mandelbrot(t_fr_data *fr_data)
 {
@@ -138,8 +158,9 @@ void	ft_mandelbrot(t_fr_data *fr_data)
                 fr_data->zx = fr_data->new_re;
                 fr_data->zy = fr_data->new_im;
                 color++;
-            }
-			mlx_put_pixel(fr_data->img, i, j, color * 25 / fr_data->max_iter);
+			}
+			//printf("color : %d\n", color);
+			mlx_put_pixel(fr_data->img, i, j, set_color(color));
 			j++;
 		}
 		i++;
