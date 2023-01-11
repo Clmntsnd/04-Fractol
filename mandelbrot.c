@@ -6,6 +6,7 @@
 #define WIDTH 1200	
 #define HEIGHT 800
 
+
 static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
@@ -22,110 +23,98 @@ static void ft_hooks(void* param)
 }
 */
 
+//a mettre dans un .h
 typedef struct s_fr_data
 {
 	double	x;
 	double	y;
-	double xmin;
-	double xmax;
-	double ymin;
-	double ymax;
-
-	// xmin = -2;
-	// xmax = 1;
-	// ymin = -1;
-	// ymax = 1;
-	// max_iter = 128;
+	double	xmin;
+	double	xmax;
+	double	ymin;
+	double	ymax;
+	double	zx;
+	double	zy;
+	double	c_re;
+	double	c_im;
+	double	new_re;
+	double	new_im;
+	int		max_iter;
+	mlx_image_t *img;
 	
 } t_fr_data;
 
-/*
+//a mettre dans un .h
+void	ft_mandelbrot(t_fr_data *fr_data);
+
+//a mettre dans un .h
+t_fr_data *get_data()
+{
+	static t_fr_data *fr_data;
+
+	if (!fr_data)
+	{
+		fr_data = malloc(sizeof(t_fr_data)); //memory allocation for the struct
+		fr_data->xmin = -2;
+		fr_data->xmax = 1;
+		fr_data->ymin = -1;
+		fr_data->ymax = 1;
+		fr_data->max_iter = 25;
+	}
+	return (fr_data);
+}
+
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
 	t_fr_data *fr_data;
 
+	fr_data = get_data();
 	
-	// If we PRESS the 'UP' key, print "Hello".
-	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		puts("Hello ");
-
-	// If we RELEASE the 'K' key, print "World".
-	if (keydata.key == MLX_KEY_K && keydata.action == MLX_RELEASE)
-		puts("World");
-	
+	//close program when pressing ESC key
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	{		
+		exit(0);
+	}
 
 	// If we HOLD the 'UP' key, move image up.
 	if (keydata.key == MLX_KEY_UP && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{		
-		fr_data->xmin += .1;
-		fr_data->ymin += .1;
-
+		fr_data->ymin += .5;
+		fr_data->ymax += .5;
+		ft_mandelbrot(fr_data);
+	}
+	// If we HOLD the 'UP' key, move image up.
+	if (keydata.key == MLX_KEY_DOWN && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	{		
+		fr_data->ymin -= .5;
+		fr_data->ymax -= .5;
+		ft_mandelbrot(fr_data);
+	}
+	// If we HOLD the 'UP' key, move image up.
+	if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	{		
+		fr_data->xmin += .5;
+		fr_data->xmax += .5;
+		ft_mandelbrot(fr_data);
+	}
+	if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	{		
+		fr_data->xmin -= .5;
+		fr_data->xmax -= .5;
+		ft_mandelbrot(fr_data);
 	}
 }
-*/
 
-void	ft_mandelbrot(mlx_image_t* img)
+
+void	ft_mandelbrot(t_fr_data *fr_data)
 {
-	t_fr_data fr_data;
-
-	/*
-	**	These variables are used to loop over the pixels of the image. 
-	**	i is the index of the current column, and j is the index of the current row.
-	*/
-	int		i, j;
-	
-	/*
-	**	These variables are used to store the real and imaginary components 
-	**	of the current point being tested for membership in the Mandelbrot set.
-	*/
-	double	x, y;
-	//t_fr *fr;
-
-	/*
-	**	These variables define the range of x and y values that will be used 
-	**	to calculate the set. 
-	**	They determine the portion of the complex plane that will be drawn.
-	*/	
-	double xmin, xmax, ymin, ymax;
-
-	/*
-	**	This variable specifies the maximum number of iterations that the 
-	**	program will perform when testing a point for membership in the
-	**	Mandelbrot set.
-	*/
-	int		max_iter;
-
-	/*
-	**	These variables are used to store the real and imaginary components 
-	**	of the current value of z in the Mandelbrot set equation z_n+1 = z_n^2 + c.
-	*/
-	double 	zx, zy;
-
-	/*
-	**	These variables are used to store the real (re) and imaginary (im) components 
-	**	of the constant c in the Mandelbrot set equation.
-	*/
-	double c_re, c_im;
-	
-	/*
-	**	These variables are used to store the real (re) and imaginary (im) components 
-	**	of the transformed value of z in the Mandelbrot set equation.
-	*/
-	double new_re, new_im;
-
-	/*
-	**	This variable is used to store the color of the current pixel. 
-	**	The value of color is determined by the number of iterations performed before 
-	**	the magnitude of z becomes greater than or equal to 2 (which is considered to be 
-	**	the threshold for divergence).
-	*/
+	int		i;
+	int		j;
 	int color;
 
-	fr_data.xmin = -2;
-	fr_data.xmax = 1;
-	fr_data.ymin = -1;
-	fr_data.ymax = 1;
-	max_iter = 128;
+	printf("xmin : %f\n", fr_data->xmin);
+	printf("xmax : %f\n", fr_data->xmax);
+	printf("ymin : %f\n", fr_data->ymin);
+	printf("ymax : %f\n\n", fr_data->ymax);
 
 	i = 0;
 	while (i < WIDTH)
@@ -133,26 +122,24 @@ void	ft_mandelbrot(mlx_image_t* img)
 		j = 0;
 		while (j < HEIGHT)
 		{
-			fr_data.x = fr_data.xmin + i * (fr_data.xmax - fr_data.xmin) / WIDTH;
-			// fr_data->x = fr_data->xmin + i * (fr_data->xmax - fr_data->xmin) / WIDTH;
-        	// fr_data->y = fr_data->ymin + j * (fr_data->ymax - fr_data->ymin) / HEIGHT;
-        	fr_data.y = fr_data.ymin + j * (fr_data.ymax - fr_data.ymin) / HEIGHT;
+			fr_data->x = fr_data->xmin + i * (fr_data->xmax - fr_data->xmin) / WIDTH;
+        	fr_data->y = fr_data->ymin + j * (fr_data->ymax - fr_data->ymin) / HEIGHT;
 
-            c_re = x;
-            c_im = y;
-            zx = 0;
-            zy = 0;
+            fr_data->c_re = fr_data->x;
+            fr_data->c_im = fr_data->y;
+            fr_data->zx = 0;
+            fr_data->zy = 0;
 
             color = 0;
-            while (zx * zx + zy * zy < 4 && color < max_iter)
+            while (fr_data->zx * fr_data->zx + fr_data->zy * fr_data->zy < 4 && color < fr_data->max_iter)
             {
-                new_re = zx * zx - zy * zy + c_re;
-                new_im = 2 * zx * zy + c_im;
-                zx = new_re;
-                zy = new_im;
+                fr_data->new_re = fr_data->zx * fr_data->zx - fr_data->zy * fr_data->zy + fr_data->c_re;
+                fr_data->new_im = 2 * fr_data->zx * fr_data->zy + fr_data->c_im;
+                fr_data->zx = fr_data->new_re;
+                fr_data->zy = fr_data->new_im;
                 color++;
             }
-			mlx_put_pixel(img, i, j, color * 128 / max_iter);
+			mlx_put_pixel(fr_data->img, i, j, color * 25 / fr_data->max_iter);
 			j++;
 		}
 		i++;
@@ -161,19 +148,21 @@ void	ft_mandelbrot(mlx_image_t* img)
 
 int32_t	main(void)
 {
+	t_fr_data *fr_data;
 	// This line is for setting the window in maximised state
 	//mlx_set_setting(MLX_MAXIMIZED, true); 
 	
+	fr_data = get_data();
 	mlx_t*	mlx;
-	mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot set", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot set", false);
 	if (!mlx)
 		ft_error();
-	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+	fr_data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!fr_data->img || (mlx_image_to_window(mlx, fr_data->img, 0, 0) < 0))
 		ft_error();
-	ft_mandelbrot(img);
+	ft_mandelbrot(fr_data);
 	//mlx_loop_hook(mlx, ft_hooks, mlx);
-	//mlx_key_hook(mlx, &my_keyhook, NULL);
+	mlx_key_hook(mlx, &my_keyhook, NULL);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
