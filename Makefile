@@ -75,6 +75,6 @@ fclean: clean
 
 re: fclean all
 	@echo "$(PURPLE)Relink Successful! $(WHITE)"
-run: $(NAME) 
+run:  
 	$(RUN)
 .PHONY: all clean fclean re run lib
