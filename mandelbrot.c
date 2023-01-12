@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <memory.h>
 #include <math.h>
-#define WIDTH 1200	
-#define HEIGHT 800
+#define WIDTH 600	
+#define HEIGHT 400
 
 
 static void ft_error(void)
@@ -44,6 +44,7 @@ typedef struct s_fr_data
 	double	c_im;
 	double	new_re;
 	double	new_im;
+	int 	iter;
 	int		max_iter;
 	mlx_image_t *img;
 	
@@ -82,7 +83,13 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	}
 
 	// If we HOLD the 'UP' key, move image up.
-	if (keydata.key == MLX_KEY_UP && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
+	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
+	{		
+		fr_data->ymin += .5;
+		fr_data->ymax += .5;
+		ft_mandelbrot(fr_data);
+	}
+	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_REPEAT)
 	{		
 		fr_data->ymin += .5;
 		fr_data->ymax += .5;
@@ -104,8 +111,8 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	}
 	if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS))
 	{		
-		fr_data->xmin -= .5;
-		fr_data->xmax -= .5;
+		fr_data->xmin -= .002;
+		fr_data->xmax -= .002;
 		ft_mandelbrot(fr_data);
 	}
 }
@@ -129,7 +136,7 @@ void	ft_mandelbrot(t_fr_data *fr_data)
 {
 	int		i;
 	int		j;
-	int color;
+	int 	color;
 
 	printf("xmin : %f\n", fr_data->xmin);
 	printf("xmax : %f\n", fr_data->xmax);
@@ -149,15 +156,17 @@ void	ft_mandelbrot(t_fr_data *fr_data)
             fr_data->c_im = fr_data->y;
             fr_data->zx = 0;
             fr_data->zy = 0;
-
+			fr_data->iter = 0;
             color = 0;
-            while (fr_data->zx * fr_data->zx + fr_data->zy * fr_data->zy < 4 && color < fr_data->max_iter)
+            while (fr_data->zx * fr_data->zx + fr_data->zy * fr_data->zy < 4 && fr_data->iter < fr_data->max_iter)
             {
-                fr_data->new_re = fr_data->zx * fr_data->zx - fr_data->zy * fr_data->zy + fr_data->c_re;
-                fr_data->new_im = 2 * fr_data->zx * fr_data->zy + fr_data->c_im;
+                //fr_data->new_re = fr_data->zx * fr_data->zx - fr_data->zy * fr_data->zy + fr_data->c_re;
+                fr_data->new_re = pow(fr_data->zx, 2) - pow(fr_data->zy, 2) + fr_data->c_re;
+				fr_data->new_im = 2 * fr_data->zx * fr_data->zy + fr_data->c_im;
                 fr_data->zx = fr_data->new_re;
                 fr_data->zy = fr_data->new_im;
                 color++;
+				fr_data->iter++;
 			}
 			//printf("color : %d\n", color);
 			mlx_put_pixel(fr_data->img, i, j, set_color(color));
