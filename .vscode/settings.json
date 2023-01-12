@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"mlx42.h": "c",
-		"__config": "c"
+		"__config": "c",
+		"fractol.h": "c"
 	}
 }
