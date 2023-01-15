@@ -49,3 +49,27 @@ void	ft_mandelbrot(t_fr_data *fr_data)
 		i++;
 	}
 }
+
+/*
+int32_t	main(void)
+{
+	t_fr_data *fr_data;
+	// This line is for setting the window in maximised state
+	//mlx_set_setting(MLX_MAXIMIZED, true); 
+	
+	fr_data = get_data();
+	mlx_t*	mlx;
+	mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot set", false);
+	if (!mlx)
+		ft_error();
+	fr_data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!fr_data->img || (mlx_image_to_window(mlx, fr_data->img, 0, 0) < 0))
+		ft_error();
+	ft_mandelbrot(fr_data);
+	//mlx_loop_hook(mlx, ft_hooks, mlx);
+	mlx_key_hook(mlx, &my_keyhook, NULL);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (EXIT_SUCCESS);
+}
+*/

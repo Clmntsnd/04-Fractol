@@ -1,0 +1,107 @@
+## -----  NAME OF THE PROGRAMM ----- ##
+NAME = fractol
+
+## ----- COMPILER AND FLAGS ----- ##
+CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror
+
+# ----- OS CHECK ----- #
+OS = $(shell uname)
+OS_AIR = $(shell uname -p)
+
+# ----- Flags depending on the OS ----- #
+# ----- MAC ----- #
+MAC_INTEL = -I /include -lglfw -pthread -L "/Users/$(USER)/.brew/opt/glfw/lib/"
+MAC_M2 = -I /include -lglfw -pthread -L "/opt/homebrew/Cellar/glfw/3.3.8/lib"
+
+# ----- MLX42 LIB ----- #
+CLONE = git clone https://github.com/codam-coding-college/MLX42.git;
+MLX = ./lib/MLX42/libmlx42.a
+
+# ----- REMOVE ----- #
+RM = rm -f
+
+# ---- RUN ---- #
+RUN = ./fractol 1
+
+## ----- PATH TO DIRECTORIES ----- ##
+SRCS_DIR = src/
+# OBJ_DIR			= obj/
+
+LIB_DIR = lib/
+
+## ----- FILES ----- ##
+# SRCS = ./srcs/main.c ./srcs/data.c ./srcs/get_rgba.c ./srcs/mandelbrot.c ./srcs/my_keyhook.c
+
+# OBJ = $(SRCS:.c=.o)
+
+SRC	= src/main.c src/data.c src/get_rgba.c src/mandelbrot.c src/my_keyhook.c 
+OBJ = $(SRC:%.c=%.o)
+
+# ----- Check OS to get the correcrt FLAGS ----- #
+ifeq ($(OS_AIR), arm)
+	FLAGS = $(MAC_M2)
+else ifeq ($(OS), Darwin)
+	FLAGS = $(MAC_INTEL)
+endif
+
+## ----- TOOLS AND COLORS ----- ##
+RM				= rm -rf
+NO_PRINT		= --no-print-directory
+RED 			= \033[31m
+GREEN 			= \033[32m
+YELLOW 			= \033[33m
+BLUE 			= \033[34m
+PINK 			= \033[35m
+AQUA 			= \033[36m
+GREY 			= \033[37m
+UNDERLINE 		= \033[4m
+NORMAL 			= \033[0m
+
+# $(NAME): libmlx ${OBJ}
+# 	${CC} $(CFLAGS) $(FLAGS) -I $(MLX) $(OBJ) -o ${NAME}
+
+# %.o: %.c
+# 	$(CC) $(CFLAGS) $(FLAGS) -I $(MLX) -c $^ -o $@
+
+$(NAME): libmlx ${OBJ}
+	${CC} $(CFLAGS) $(OBJ) $(MLX) $(FLAGS) -o ${NAME}
+
+src/%.o: src/%.c
+	${CC} $(CFLAGS) $(OBJ) $(MLX) $(FLAGS) -c $^ -o $@ 
+
+libmlx:
+	@if [ ! -d "./lib/MLX42" ]; then \
+		cd lib && $(CLONE) \
+	fi
+
+all: $(NAME)
+
+	@cd lib && make -C MLX42
+
+clean:
+	@echo "$(RED)💥Cleaning .o💥$(WHITE)"
+	@sleep 1 > /dev/null
+	$(RM) $(OBJ)
+	@if [ -d "./lib/MLX42" ]; then \
+		make clean -C lib/MLX42; \
+	fi
+	@echo "🎉$(GREEN)Cleaning done!$(WHITE)🎉"
+
+fclean: clean
+	@echo "$(RED)💥Removing files...💥"
+	@sleep 1 > /dev/null
+	$(RM) $(NAME)
+	@echo "$(RED)💥Removing MLX Directory...💥"
+	@sleep 1 > /dev/null
+	@if [ -d "./lib/MLX42" ]; then \
+		rm -rf lib/MLX42; \
+	fi
+	@echo "🎉$(GREEN)Cleaning done!$(WHITE)🎉"
+
+re: fclean all
+
+.PHONY: all clean fclean re
+
+

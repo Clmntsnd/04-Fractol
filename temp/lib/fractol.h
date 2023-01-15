@@ -10,8 +10,8 @@
 #define BLU "\x1B[34m"
 #define WHT "\x1B[37m"
 #define YEL "\x1B[33m"
-#define WIDTH 800
-#define HEIGHT 640
+#define WIDTH 750
+#define HEIGHT 750
 #define IM_RATIO
 // #define IMG_WIDTH 640
 // #define IMG_HEIGHT 800

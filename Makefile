@@ -1,29 +1,40 @@
-# Executable #
+# -- Executable's name -- #
 NAME = fractol
-# Compile stuff #
+
+# -- Compiler -- #
 CC = gcc
-CFGLAGS = -Wall -Werror -Wextra
-# LINUX and WSL WINDOWS FLAG #
+#CFLAGS = -Wall -Werror -Wextra
+
+# -- OS CHECK -- #
+OS = $(shell uname)
+OS_AIR = $(shell uname -p)
+
+# -- Flags depending on the OS -- #
+# -- LINUX and WSL -- #
 LINUX = -ldl -lglfw -pthread -lm
-# MAC FLAG #
+# -- MAC -- #
 MAC = -I /include -lglfw -pthread -L "/Users/$(USER)/.brew/opt/glfw/lib/"
-# REMOVE #
-REMOVE = rm -f
-# LIBS #
+MAC_AIR = -I /include -lglfw -pthread -L "/opt/homebrew/Cellar/glfw/3.3.8/lib"
+
+# -- REMOVE -- #
+RM = rm -f
+
+# -- MLX42 LIB -- #
 CLONE = git clone https://github.com/codam-coding-college/MLX42.git;
 MLX = ./lib/MLX42/libmlx42.a
-# RUN #
+
+# -- RUN -- #
 RUN = ./fractol 1
-# OBJS #
+
+# -- OBJS -- #
 OBJS = ${SRC:.c=.o}
-# OS CHECK #
-OS = $(shell uname)
-# Source #
+
+# -- Sources -- #
 SRC = 	./src/mandelbrot.c ./src/data.c ./src/get_rgba.c ./src/my_keyhook.c \
 	 	./src/main.c \
 
 		
-# Colors #
+# -- Colors -- #
 BLACK = \033[0;30m
 RED = \033[0;31m
 GREEN = \033[0;32m
@@ -33,16 +44,17 @@ PURPLE = \033[0;35m
 CYAN = \033[0;36m
 WHITE = \033[0;37m
 
-#CHECK WHICH OS IS RUNNING TO GET THE CORRECT COMPILATION FLAG #
-ifeq ($(OS), Linux)
+# -- Check OS to get the correcrt FLAGS -- #
+ifeq ($(OS_AIR), arm)
+	FLAGS = $(MAC_AIR)
+else ifeq ($(OS), Linux)
 	FLAGS = $(LINUX)
 else ifeq ($(OS), Darwin)
 	FLAGS = $(MAC)
-
 endif
 
 $(NAME): lib ${OBJS}
-	${CC} $(CFGLAGS) $(OBJS) $(MLX) $(FLAGS) -o ${NAME}
+	${CC} $(CFLAGS) $(OBJS) $(MLX) $(FLAGS) -o ${NAME}
 	@echo "🎉$(GREEN)Everything compiled!$(WHITE)🎉"
 
 lib:
@@ -56,7 +68,7 @@ all: $(NAME)
 clean:
 	@echo "$(RED)💥Cleaning .o💥$(WHITE)"
 	@sleep 1 > /dev/null
-	$(REMOVE) $(OBJS)
+	$(RM) $(OBJS)
 	@if [ -d "./lib/MLX42" ]; then \
 		make clean -C lib/MLX42; \
 	fi
@@ -65,7 +77,7 @@ clean:
 fclean: clean
 	@echo "$(RED)💥Removing files...💥"
 	@sleep 1 > /dev/null
-	$(REMOVE) $(NAME)
+	$(RM) $(NAME)
 	@echo "$(RED)💥Removing MLX Directory...💥"
 	@sleep 1 > /dev/null
 	@if [ -d "./lib/MLX42" ]; then \
@@ -78,3 +90,5 @@ re: fclean all
 run:  
 	$(RUN)
 .PHONY: all clean fclean re run lib
+
+
