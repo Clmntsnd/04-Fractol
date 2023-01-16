@@ -36,7 +36,6 @@ int print_usage (void)
 int	main(int argc, char *argv[])
 {
 		t_fr_data *fr_data;
-		mlx_t *mlx;
 
 	if (argc == 1)
 	{
@@ -45,17 +44,17 @@ int	main(int argc, char *argv[])
 	else
 	{
 		fr_data = get_data();
-		mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot set", false);
-		if (!mlx)
+		fr_data->mlx = mlx_init(WIDTH, HEIGHT, "Mandelbrot set", false);
+		if (!fr_data->mlx)
 			ft_error();
-		fr_data->img = mlx_new_image(mlx, WIDTH, HEIGHT);
-		if (!fr_data->img || (mlx_image_to_window(mlx, fr_data->img, 0, 0) < 0))
+		fr_data->img = mlx_new_image(fr_data->mlx, WIDTH, HEIGHT);
+		if (!fr_data->img || (mlx_image_to_window(fr_data->mlx, fr_data->img, 0, 0) < 0))
 			ft_error();
 		ft_mandelbrot(fr_data);
-		//mlx_loop_hook(mlx, ft_hooks, mlx);
-		mlx_key_hook(mlx, &my_keyhook, mlx);
-		mlx_loop(mlx);
-		mlx_terminate(mlx);
+		//mlx_loop_hook(fr_data->mlx, ft_hooks, fr_data->mlx);
+		mlx_key_hook(fr_data->mlx, &my_keyhook, fr_data->mlx);
+		mlx_loop(fr_data->mlx);
+		mlx_terminate(fr_data->mlx);
 		return (EXIT_SUCCESS);
 	}
 	/*

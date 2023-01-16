@@ -18,8 +18,8 @@
 
 typedef struct s_fr_data
 {
-	unsigned int		x;
-	unsigned int		y;
+	double		x;
+	double		y;
 	double		im_ratio;
 	double 		re_av;
 	double 		im_av;
@@ -38,6 +38,7 @@ typedef struct s_fr_data
 	double 		re_factor;
 	double 		im_factor;
 	mlx_image_t	*img;
+	mlx_t 		*mlx;
 
 }				t_fr_data;
 

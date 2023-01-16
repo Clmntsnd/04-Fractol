@@ -9,7 +9,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	//close program when pressing ESC key
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 	{
-		exit(0);
+		mlx_close_window(fr_data->mlx);
 	}
 	// If we HOLD the 'UP' key, move image up.
 	if (keydata.key == MLX_KEY_UP && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
