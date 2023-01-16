@@ -20,6 +20,10 @@ typedef struct s_fr_data
 {
 	double		x;
 	double		y;
+	double		i;
+	double		j;
+	double		img_width;
+	double		img_height;
 	double		im_ratio;
 	double 		re_av;
 	double 		im_av;
@@ -42,24 +46,15 @@ typedef struct s_fr_data
 
 }				t_fr_data;
 
-/*
-// Print the window width and height.
-static void	ft_hooks(void* param)
-{
-	const mlx_t* mlx = param;
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-}
-
-*/
-
 int	get_rgba(int r, int g, int b, int a);
-
 int set_color(int c);
 
 void	ft_mandelbrot(t_fr_data *fr_data);
+void	ft_julia(t_fr_data *fr_data);
 
 t_fr_data	*get_data();
 
 void	my_keyhook(mlx_key_data_t keydata, void *param);
+void 	my_scrollhook(double xdelta, double ydelta, void* param);
 
 #endif

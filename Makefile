@@ -30,7 +30,7 @@ RUN = ./fractol 1
 OBJS = ${SRC:.c=.o}
 
 # -- Sources -- #
-SRC = 	./src/mandelbrot.c ./src/data.c ./src/get_rgba.c ./src/my_keyhook.c \
+SRC = 	./src/mandelbrot.c ./src/julia.c ./src/data.c ./src/get_rgba.c ./src/my_keyhook.c \
 	 	./src/main.c \
 
 		

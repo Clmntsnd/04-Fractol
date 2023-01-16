@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 11:55:07 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/16 12:12:07 by csenand          ###   ########.fr       */
+/*   Created: 2023/01/16 17:06:28 by csenand           #+#    #+#             */
+/*   Updated: 2023/01/16 17:07:32 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
-void	ft_mandelbrot(t_fr_data *fr_data)
+void	ft_julia(t_fr_data *fr_data)
 {
-	double	xdelta;
-	double	ydelta;
-
-	xdelta = fr_data->xmax - fr_data->xmin;
-	ydelta = fr_data->ymax - fr_data->ymin;
+	fr_data->c_re = 0.285;
+	fr_data->c_im = -0.01;
+	//0.285 + 0.01i
 
 	printf("xmin : %f\n", fr_data->xmin);
 	printf("xmax : %f\n", fr_data->xmax);
@@ -32,8 +30,6 @@ void	ft_mandelbrot(t_fr_data *fr_data)
 		fr_data->j = 0;
 		while (++(fr_data->j) < fr_data->img_height)
 		{
-            fr_data->c_re = fr_data->xmin + fr_data->i * xdelta / fr_data->img_width;
-            fr_data->c_im = fr_data->ymin + fr_data->j * ydelta / fr_data->img_height;
             fr_data->zx = 0;
             fr_data->zy = 0;
 			fr_data->iter = 0;
