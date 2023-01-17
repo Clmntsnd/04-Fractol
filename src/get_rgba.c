@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 11:54:49 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/16 16:59:54 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/17 14:52:58 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	get_rgba(int r, int g, int b, int a)
 
 uint32_t set_color(int c)
 {	
-	/*
 	t_fr_data *fr_data;
 	double	fraction;
 	int		red;
@@ -43,23 +42,23 @@ uint32_t set_color(int c)
 		blue = 0;
 	}
 	return (get_rgba(red, green, blue, 255));
-	*/
 
-	int	gray_level;
+	/*
+	uint32_t	gray_level;
 
 	gray_level = 255 * (c % 2);
 	return (get_rgba(gray_level, gray_level, gray_level, 0xFF));
-/*
-	int color;
 
-	color = 0;
-	if (c < 50)
-		color = get_rgba(215,31,31,255); //red
-	else if (c >= 50 && c <=100)
-		color = get_rgba(255, 0, 255, 255);
-	else
-		color = get_rgba(0,0,0,255); //black
+		int color;
+
+		color = 0;
+		if (c < 50)
+			color = get_rgba(215,31,31,255); //red
+		else if (c >= 65 && c <=75)
+			color = get_rgba(255, 0, 255, 255);
+		else
+			color = get_rgba(0,0,0,255); //black
 	return (color);
-*/
+	*/
 	
 }

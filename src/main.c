@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/16 17:03:03 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/17 12:57:45 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,28 @@ static void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
+void exec(t_fr_data *fr_data, char *title)
+{
+	fr_data->mlx = mlx_init(fr_data->img_width, fr_data->img_height, title, false);
+	if (!fr_data->mlx)
+		ft_error();
+	fr_data->img = mlx_new_image(fr_data->mlx, fr_data->img_width, fr_data->img_height);
+	if (!fr_data->img || (mlx_image_to_window(fr_data->mlx, fr_data->img, 0, 0) < 0))
+		ft_error();
+	fr_data->f(fr_data);	
+}
+
 int print_usage (void)
 {
-	puts(RED "\n❌ Uh oh" WHT ", something is missing! See Below.\n" WHT);
-	puts(GRN "✅ Usage :" WHT " ./fractol " RED "[fractal_set_nb]\n");
-	puts(YEL "📝 Available Sets");
-	puts("  --> 1️⃣  Mandelbrot");
-	puts("  --> 2️⃣  Julia\n");
-	puts("    |-> For Julia, please provide 2 args :");
-	puts("    |-> ./fractol 2 [A] [B]");
-	puts("    |-> A and B are floats nb (-2 < A < 2 & -2 < B < 2)\n");
-	puts(GRN "Please type the accurate command to start the program");
+	printf(RED "\n❌ Uh oh" WHT ", something is missing! See Below.\n\n" WHT);
+	printf(GRN "✅ Usage :" WHT " ./fractol " RED "[fractal_set_nb]\n");
+	printf(YEL "\n📝 Available Sets\n");
+	printf("  --> 1️⃣  Mandelbrot\n");
+	printf("  --> 2️⃣  Julia (*)\n\n");
+	printf("(*) For Julia, please provide 2 args :\n");
+	printf("\t|-> ./fractol 2 [A] [B]\n");
+	printf("\t|-> A and B are floats nb (-2 < A < 2 & -2 < B < 2)\n");
+	printf(GRN "\nPlease type the accurate command to start the program \n");
 	return (1);
 }
 
@@ -46,23 +57,15 @@ int	main(int argc, char *argv[])
 		fr_data = get_data();
 		if (argv[1][0] == '1')
 		{
-			fr_data->mlx = mlx_init(fr_data->img_width, fr_data->img_height, "Mandelbrot set", false);
-			if (!fr_data->mlx)
-				ft_error();
-			fr_data->img = mlx_new_image(fr_data->mlx, fr_data->img_width, fr_data->img_height);
-			if (!fr_data->img || (mlx_image_to_window(fr_data->mlx, fr_data->img, 0, 0) < 0))
-				ft_error();
-			ft_mandelbrot(fr_data);
+			fr_data->f = &ft_mandelbrot;
+			exec(fr_data, "Mandelbrot");
+			
 		}
+	
 		if (argv[1][0] == '2')
 		{
-			fr_data->mlx = mlx_init(fr_data->img_width, fr_data->img_height, "Julia set", false);
-			if (!fr_data->mlx)
-				ft_error();
-			fr_data->img = mlx_new_image(fr_data->mlx, fr_data->img_width, fr_data->img_height);
-			if (!fr_data->img || (mlx_image_to_window(fr_data->mlx, fr_data->img, 0, 0) < 0))
-				ft_error();
-			ft_julia(fr_data);
+			fr_data->f = &ft_julia;
+			exec(fr_data, "Julia");
 		}
 		mlx_key_hook(fr_data->mlx, &my_keyhook, NULL);
 		mlx_scroll_hook(fr_data->mlx, &my_scrollhook, NULL);

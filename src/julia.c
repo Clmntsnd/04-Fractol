@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:06:28 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/16 17:07:32 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/17 14:49:59 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,32 @@
 
 void	ft_julia(t_fr_data *fr_data)
 {
-	fr_data->c_re = 0.285;
-	fr_data->c_im = 0.01;
+
+	double	xdelta;
+	double	ydelta;
+
+	xdelta = fr_data->xmax - fr_data->xmin;
+	ydelta = fr_data->ymax - fr_data->ymin;
+	
+	fr_data->c_re = - 0.70176;
+	fr_data->c_im = 0.3842;
 	//0.285 + 0.01i
+	//−0.70176 − 0.3842
 
-	printf("xmin : %f\n", fr_data->xmin);
-	printf("xmax : %f\n", fr_data->xmax);
-	printf("ymin : %f\n", fr_data->ymin);
-	printf("ymax : %f\n\n", fr_data->ymax);
+	// printf("xmin : %f\n", fr_data->xmin);
+	// printf("xmax : %f\n", fr_data->xmax);
+	// printf("ymin : %f\n", fr_data->ymin);
+	// printf("ymax : %f\n\n", fr_data->ymax);
 
-	fr_data->i = 0;
+	fr_data->i = -1;
 	while (++(fr_data->i) < fr_data->img_width)
 	{
-		fr_data->j = 0;
+		fr_data->j = -1;
 		while (++(fr_data->j) < fr_data->img_height)
 		{
-            fr_data->zx = 0;
-            fr_data->zy = 0;
+			
+			fr_data->zx = fr_data->xmin + fr_data->i * xdelta / fr_data->img_width;
+            fr_data->zy = fr_data->ymin + fr_data->j * ydelta / fr_data->img_height;;
 			fr_data->iter = 0;
             while (pow(fr_data->zx, 2) + pow(fr_data->zy, 2) < 4 && fr_data->iter < fr_data->max_iter)
             {

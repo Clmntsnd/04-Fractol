@@ -44,7 +44,8 @@ typedef struct s_fr_data
 	double 		im_factor;
 	mlx_image_t	*img;
 	mlx_t 		*mlx;
-	pthread_mutex_t mutex;
+	// pthread_mutex_t mutex;
+	void (*f)(struct s_fr_data *);
 
 }				t_fr_data;
 

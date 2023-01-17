@@ -53,7 +53,9 @@ else ifeq ($(OS), Darwin)
 	FLAGS = $(MAC)
 endif
 
-$(NAME): lib ${OBJS}
+all: lib $(NAME)
+
+$(NAME): ${OBJS} ./lib/fractol.h
 	${CC} $(CFLAGS) $(OBJS) $(MLX) $(FLAGS) -o ${NAME}
 	@echo "🎉$(GREEN)Everything compiled!$(WHITE)🎉"
 
@@ -63,7 +65,6 @@ lib:
 	fi
 	@cd lib && make -C MLX42
 
-all: $(NAME)
 
 clean:
 	@echo "$(RED)💥Cleaning .o💥$(WHITE)"
