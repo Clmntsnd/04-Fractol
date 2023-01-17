@@ -104,10 +104,10 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 	fr_data = get_data();
 	if (ydelta > 0)
 	{
-		fr_data->ymin /= 1.1;
-		fr_data->ymax /= 1.1;
-		fr_data->xmin /= 1.1;
-		fr_data->xmax /= 1.1;
+		fr_data->ymin *= 0.9;
+		fr_data->ymax *= 0.9;
+		fr_data->xmin *= 0.9;
+		fr_data->xmax *= 0.9;
 		ft_mandelbrot(fr_data);
 	}	
 	else if (ydelta < 0)

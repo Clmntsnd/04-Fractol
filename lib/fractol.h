@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <pthread.h>
 #define RED "\x1B[31m"
 #define GRN "\x1B[32m"
 #define BLU "\x1B[34m"
@@ -43,11 +44,12 @@ typedef struct s_fr_data
 	double 		im_factor;
 	mlx_image_t	*img;
 	mlx_t 		*mlx;
+	pthread_mutex_t mutex;
 
 }				t_fr_data;
 
 int	get_rgba(int r, int g, int b, int a);
-int set_color(int c);
+uint32_t set_color(int c);
 
 void	ft_mandelbrot(t_fr_data *fr_data);
 void	ft_julia(t_fr_data *fr_data);

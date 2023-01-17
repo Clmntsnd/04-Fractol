@@ -16,7 +16,7 @@
 void	ft_julia(t_fr_data *fr_data)
 {
 	fr_data->c_re = 0.285;
-	fr_data->c_im = -0.01;
+	fr_data->c_im = 0.01;
 	//0.285 + 0.01i
 
 	printf("xmin : %f\n", fr_data->xmin);

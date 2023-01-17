@@ -14,8 +14,8 @@ t_fr_data	*get_data()
 		fr_data->img_width = 800;
 		fr_data->xmin = -2;
 		fr_data->xmax = 1;
-		fr_data->ymin = -1;
-		fr_data->ymax = 1;
+		fr_data->ymin = -1.2;
+		fr_data->ymax = 1.2;
 		fr_data->max_iter = 128;
 	}
 	return (fr_data);

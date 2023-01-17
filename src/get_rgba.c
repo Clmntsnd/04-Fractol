@@ -18,8 +18,38 @@ int	get_rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int set_color(int c)
-{
+uint32_t set_color(int c)
+{	
+	/*
+	t_fr_data *fr_data;
+	double	fraction;
+	int		red;
+	int		green;
+	int		blue;
+
+	fraction = c / fr_data->max_iter;
+	if (fr_data->iter  == fr_data->max_iter)
+		return (get_rgba(0x0, 0x0, 0x0, 0xFF));
+	if (fraction < 0.5)
+	{
+		red = (255 * (2 * fraction));
+		green = 0;
+		blue = (255 * (1 - 2 * fraction));
+	}
+	else
+	{
+		green = (255 * (1 - 2 * fraction));
+		red = (255 * (2 * fraction - 1));
+		blue = 0;
+	}
+	return (get_rgba(red, green, blue, 255));
+	*/
+
+	int	gray_level;
+
+	gray_level = 255 * (c % 2);
+	return (get_rgba(gray_level, gray_level, gray_level, 0xFF));
+/*
 	int color;
 
 	color = 0;
@@ -30,4 +60,6 @@ int set_color(int c)
 	else
 		color = get_rgba(0,0,0,255); //black
 	return (color);
+*/
+	
 }

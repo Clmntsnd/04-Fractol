@@ -20,11 +20,12 @@ void	ft_mandelbrot(t_fr_data *fr_data)
 
 	xdelta = fr_data->xmax - fr_data->xmin;
 	ydelta = fr_data->ymax - fr_data->ymin;
-
+	/*
 	printf("xmin : %f\n", fr_data->xmin);
 	printf("xmax : %f\n", fr_data->xmax);
 	printf("ymin : %f\n", fr_data->ymin);
 	printf("ymax : %f\n\n", fr_data->ymax);
+	*/
 
 	fr_data->i = 0;
 	while (++(fr_data->i) < fr_data->img_width)
