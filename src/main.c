@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/17 12:57:45 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/18 14:06:41 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,26 @@ int print_usage (void)
 
 int	main(int argc, char *argv[])
 {
-		t_fr_data *fr_data;
+	t_fr_data *fr_data;
 
 	if (argc == 1)
-	{
 		return(print_usage());
-	}
 	if (argv[1][0])
 	{
-		fr_data = get_data();
+		fr_data = get_data(argv[1][0]);
 		if (argv[1][0] == '1')
 		{
 			fr_data->f = &ft_mandelbrot;
 			exec(fr_data, "Mandelbrot");
-			
 		}
-	
 		if (argv[1][0] == '2')
 		{
 			fr_data->f = &ft_julia;
 			exec(fr_data, "Julia");
 		}
-		mlx_key_hook(fr_data->mlx, &my_keyhook, NULL);
-		mlx_scroll_hook(fr_data->mlx, &my_scrollhook, NULL);
+		mlx_key_hook(fr_data->mlx, &my_keyhook, fr_data);
+		mlx_scroll_hook(fr_data->mlx, &my_scrollhook, fr_data);
+		// mlx_cursor_hook(fr_data->mlx, &my_mouse_pos, fr_data);
 		mlx_loop(fr_data->mlx);
 		mlx_terminate(fr_data->mlx);
 		return (EXIT_SUCCESS);

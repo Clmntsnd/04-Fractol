@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 17:06:28 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/17 14:49:59 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/18 15:08:45 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,16 @@
 
 void	ft_julia(t_fr_data *fr_data)
 {
-
 	double	xdelta;
 	double	ydelta;
 
 	xdelta = fr_data->xmax - fr_data->xmin;
 	ydelta = fr_data->ymax - fr_data->ymin;
 	
-	fr_data->c_re = - 0.70176;
-	fr_data->c_im = 0.3842;
+	// fr_data->c_re = - 0.70176;
+	// fr_data->c_im = 0.3842;
 	//0.285 + 0.01i
 	//−0.70176 − 0.3842
-
-	// printf("xmin : %f\n", fr_data->xmin);
-	// printf("xmax : %f\n", fr_data->xmax);
-	// printf("ymin : %f\n", fr_data->ymin);
-	// printf("ymax : %f\n\n", fr_data->ymax);
 
 	fr_data->i = -1;
 	while (++(fr_data->i) < fr_data->img_width)

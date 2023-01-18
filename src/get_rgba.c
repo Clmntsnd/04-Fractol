@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 11:54:49 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/17 14:52:58 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/18 10:27:06 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ uint32_t set_color(int c)
 	int		red;
 	int		green;
 	int		blue;
-
+/*
 	fraction = c / fr_data->max_iter;
 	if (fr_data->iter  == fr_data->max_iter)
 		return (get_rgba(0x0, 0x0, 0x0, 0xFF));
@@ -42,13 +42,14 @@ uint32_t set_color(int c)
 		blue = 0;
 	}
 	return (get_rgba(red, green, blue, 255));
+*/
 
-	/*
 	uint32_t	gray_level;
 
 	gray_level = 255 * (c % 2);
 	return (get_rgba(gray_level, gray_level, gray_level, 0xFF));
 
+/*
 		int color;
 
 		color = 0;
@@ -59,6 +60,6 @@ uint32_t set_color(int c)
 		else
 			color = get_rgba(0,0,0,255); //black
 	return (color);
-	*/
+*/
 	
 }

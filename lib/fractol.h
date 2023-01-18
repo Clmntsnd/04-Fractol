@@ -19,8 +19,10 @@
 
 typedef struct s_fr_data
 {
-	double		x;
-	double		y;
+	// double		x;
+	// double		y;
+	double		x1;
+	double		y1;
 	double		i;
 	double		j;
 	double		img_width;
@@ -44,7 +46,6 @@ typedef struct s_fr_data
 	double 		im_factor;
 	mlx_image_t	*img;
 	mlx_t 		*mlx;
-	// pthread_mutex_t mutex;
 	void (*f)(struct s_fr_data *);
 
 }				t_fr_data;
@@ -55,9 +56,10 @@ uint32_t set_color(int c);
 void	ft_mandelbrot(t_fr_data *fr_data);
 void	ft_julia(t_fr_data *fr_data);
 
-t_fr_data	*get_data();
+t_fr_data	*get_data(char c);
 
 void	my_keyhook(mlx_key_data_t keydata, void *param);
 void 	my_scrollhook(double xdelta, double ydelta, void* param);
+void	my_mouse_pos(double xpos, double ypos, void* param);
 
 #endif
