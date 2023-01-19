@@ -12,7 +12,7 @@ t_fr_data	*get_data(char c)
 		fr_data->y1 = 0;
 		fr_data->img_height = 640;
 		fr_data->img_width = 800;
-		fr_data->max_iter = 128;
+		fr_data->max_iter = 28;
 		if (c == '1')
 		{
 			fr_data->xmin = -2;

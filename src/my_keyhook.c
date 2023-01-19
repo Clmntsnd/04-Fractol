@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 11:55:12 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/18 16:25:39 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/18 18:24:04 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_fr_data	*fr_data;
+	double pi;
 	
 	fr_data = (t_fr_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
@@ -98,27 +99,20 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_Z && keydata.action == MLX_REPEAT)
 	{
 		mlx_cursor_hook(fr_data->mlx, &my_mouse_pos, fr_data);
-		// fr_data->c_im /= fr_data->y1;
-		// fr_data->c_re /= fr_data->x1;
 		printf("c_re : %f, c_im : %f\n", fr_data->c_re, fr_data->c_im);
 		if ((fr_data->c_re > -2 && fr_data->c_re < 2) || (fr_data->c_im > -2 && fr_data->c_im < 2))
 			fr_data->f(fr_data);
 	}
-	if (keydata.key == MLX_KEY_B && keydata.action == MLX_REPEAT)
+	if (keydata.key == MLX_KEY_N && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 	{
-		// fr_data->c_re = pow(fr_data->zx, 2);
-		// fr_data->c_re = pow(fr_data->zx, 2);
-		double pi;
-		
 		pi = 0;
-		while (pi > 0 && pi < 3.14)
+		while (pi > 0.00 || pi < 3.14)
 		{
 			fr_data->c_re = 0.7885 * cos(pi);
 			fr_data->c_im = 0.7885 * sin(pi);
-			
-			pi += 0.01
-			
+			pi += 1;
 		}
+		fr_data->f(fr_data);
 		//pi = 0;
 		//z^2 + 0.7885e^ia
 		// where a range from 0 to 2*pi
@@ -201,8 +195,8 @@ void	my_mouse_pos(double xpos, double ypos, void* param)
 	t_fr_data	*fr_data;
 	
 	fr_data = (t_fr_data *)param;
-	fr_data->c_re = xpos / 100;
-	fr_data->c_im = ypos / 100;
+	fr_data->c_re = xpos / fr_data->img_width;
+	fr_data->c_im = ypos / fr_data->img_height;
 	//printf("x : %f, y : %f\n", xpos, ypos);
 	// fr_data->c_re = (sin(xpos) + 1) * 2 - 2;
 	// fr_data->c_im = (sin(xpos) + 1) * 2 - 2;
