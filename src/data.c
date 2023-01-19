@@ -1,7 +1,7 @@
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
-t_fr_data	*get_data(char c)
+t_fr_data	*get_data(char c, char *arg1, char *arg2)
 {
 	static t_fr_data	*fr_data;
 
@@ -26,8 +26,10 @@ t_fr_data	*get_data(char c)
 			fr_data->xmax = 1.5;
 			fr_data->ymin = -1.5;
 			fr_data->ymax = 1.5;
-			fr_data->c_re = - 0.70176;
-			fr_data->c_im = 0.3842;
+			fr_data->c_re = my_atof(arg2);
+			fr_data->c_im = my_atof(arg1);
+			// fr_data->c_re = - 0.70176;
+			// fr_data->c_im = 0.3842;
 		}
 	}
 	return (fr_data);

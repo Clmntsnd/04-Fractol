@@ -21,12 +21,14 @@ typedef struct s_fr_data
 {
 	// double		x;
 	// double		y;
+	int			xp;
+	int			yp;
 	double		x1;
 	double		y1;
 	double		i;
 	double		j;
-	double		img_width;
-	double		img_height;
+	int			img_width;
+	int			img_height;
 	double		im_ratio;
 	double 		re_av;
 	double 		im_av;
@@ -50,13 +52,25 @@ typedef struct s_fr_data
 
 }				t_fr_data;
 
+typedef struct s_pixel_thread_params
+{
+    int x;
+    int y;
+    t_fr_data* fr_data;
+}			t_pixel_thread_params;
+
 int	get_rgba(int r, int g, int b, int a);
 uint32_t set_color(int c);
 
 void	ft_mandelbrot(t_fr_data *fr_data);
-void	ft_julia(t_fr_data *fr_data);
+// void	ft_julia(t_fr_data *fr_data);
+void* calculate_pixel(void* arg);
+void ft_julia(t_fr_data *fr_data);
 
-t_fr_data	*get_data(char c);
+double 	my_atof(char* str);
+
+int			print_usage(void);
+t_fr_data	*get_data(char c, char *arg1, char *arg2);
 
 void	my_keyhook(mlx_key_data_t keydata, void *param);
 void 	my_scrollhook(double xdelta, double ydelta, void* param);

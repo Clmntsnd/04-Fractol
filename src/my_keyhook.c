@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 11:55:12 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/18 18:24:04 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/19 13:33:33 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		puts("  h		| Show help");
 		puts("  mouse wheel	| Zoom in and out");
 		puts(YEL "\n Key Hooks (Julia set)\n");
-		puts(WHT"  c + mouse mvt	| change values to show different sets");
+		puts(WHT"  z + mouse mvt	| change values to show different sets");
 
 	}
 	if (keydata.key == MLX_KEY_Z && keydata.action == MLX_REPEAT)

@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/18 14:06:41 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/19 14:09:02 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,6 @@ void exec(t_fr_data *fr_data, char *title)
 	fr_data->f(fr_data);	
 }
 
-int print_usage (void)
-{
-	printf(RED "\n❌ Uh oh" WHT ", something is missing! See Below.\n\n" WHT);
-	printf(GRN "✅ Usage :" WHT " ./fractol " RED "[fractal_set_nb]\n");
-	printf(YEL "\n📝 Available Sets\n");
-	printf("  --> 1️⃣  Mandelbrot\n");
-	printf("  --> 2️⃣  Julia (*)\n\n");
-	printf("(*) For Julia, please provide 2 args :\n");
-	printf("\t|-> ./fractol 2 [A] [B]\n");
-	printf("\t|-> A and B are floats nb (-2 < A < 2 & -2 < B < 2)\n");
-	printf(GRN "\nPlease type the accurate command to start the program \n");
-	return (1);
-}
-
 int	main(int argc, char *argv[])
 {
 	t_fr_data *fr_data;
@@ -52,13 +38,13 @@ int	main(int argc, char *argv[])
 		return(print_usage());
 	if (argv[1][0])
 	{
-		fr_data = get_data(argv[1][0]);
+		fr_data = get_data(argv[1][0], &argv[1][1], &argv[1][2]);
 		if (argv[1][0] == '1')
 		{
 			fr_data->f = &ft_mandelbrot;
 			exec(fr_data, "Mandelbrot");
 		}
-		if (argv[1][0] == '2')
+		if (argv[1][0] == '2' && argc == 4)
 		{
 			fr_data->f = &ft_julia;
 			exec(fr_data, "Julia");

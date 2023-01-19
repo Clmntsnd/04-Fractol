@@ -20,7 +20,7 @@ MAC_AIR = -I /include -lglfw -pthread -L "/opt/homebrew/Cellar/glfw/3.3.8/lib"
 RM = rm -f
 
 # -- MLX42 LIB -- #
-CLONE = git clone https://github.com/codam-coding-college/MLX42.git;
+CLONE = git clone https://github.com/codam-coding-college/MLX42.git lib/MLX42;
 MLX = ./lib/MLX42/libmlx42.a
 
 # -- RUN -- #
@@ -31,9 +31,8 @@ OBJS = ${SRC:.c=.o}
 
 # -- Sources -- #
 SRC = 	./src/mandelbrot.c ./src/julia.c ./src/data.c ./src/get_rgba.c ./src/my_keyhook.c \
-	 	./src/main.c \
+	 	./src/utils.c ./src/main.c
 
-		
 # -- Colors -- #
 BLACK = \033[0;30m
 RED = \033[0;31m
@@ -61,10 +60,9 @@ $(NAME): ${OBJS} ./lib/fractol.h
 
 lib:
 	@if [ ! -d "./lib/MLX42" ]; then \
-		cd lib && $(CLONE) \
-	fi
-	@cd lib && make -C MLX42
-
+        $(CLONE) \
+    fi
+	@make -C lib/MLX42
 
 clean:
 	@echo "$(RED)💥Cleaning .o💥$(WHITE)"
