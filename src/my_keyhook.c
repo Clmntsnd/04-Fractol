@@ -5,199 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 11:55:12 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/19 13:33:33 by csenand          ###   ########.fr       */
+/*   Created: 2023/01/30 13:12:18 by csenand           #+#    #+#             */
+/*   Updated: 2023/01/30 14:32:30 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
-void	my_keyhook(mlx_key_data_t keydata, void *param)
+void	my_keyhook(mlx_key_data_t keydata, t_fractol *frctl)
 {
-	t_fr_data	*fr_data;
-	double pi;
-	
-	fr_data = (t_fr_data *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	{
-		mlx_close_window(fr_data->mlx);
-	}
-	if (keydata.key == MLX_KEY_UP && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-	{
-		if(keydata.action == MLX_PRESS)
-		{
-			fr_data->ymin += .1;
-			fr_data->ymax += .1;
-		}
-		else
-		{
-			fr_data->ymin += .2;
-			fr_data->ymax += .2;
-		}
-		fr_data->f(fr_data);
-	}
-	if (keydata.key == MLX_KEY_DOWN && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-	{
-		if(keydata.action == MLX_PRESS)
-		{
-			fr_data->ymin -= .1;
-			fr_data->ymax -= .1;
-		}
-		else
-		{
-			fr_data->ymin -= .2;
-			fr_data->ymax -= .2;
-		}
-		fr_data->f(fr_data);
-	}
-	if (keydata.key == MLX_KEY_RIGHT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-	{
-		if(keydata.action == MLX_PRESS)
-		{
-			fr_data->xmin -= .1;
-			fr_data->xmax -= .1;
-		}
-		else
-		{
-			fr_data->xmin -= .2;
-			fr_data->xmax -= .2;
-		}
-		fr_data->f(fr_data);
-	}
-	
-	if (keydata.key == MLX_KEY_LEFT && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-	{
-		if(keydata.action == MLX_PRESS)
-		{
-			fr_data->xmin += .1;
-			fr_data->xmax += .1;
-		}
-		else
-		{
-			fr_data->xmin += .2;
-			fr_data->xmax += .2;
-		}
-		fr_data->f(fr_data);
-	}
+		exit(0);
+	else if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
+		move(keydata.key, frctl);
+	else if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
+		move(keydata.key, frctl);
+	else if (keydata.key == MLX_KEY_I || keydata.key == MLX_KEY_O)
+		change_maxiter(keydata.key, frctl);
 	if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
-	{
-		puts(YEL "\n Key Hooks (all sets)\n");
-		puts(WHT "  esc		| Quit program");
-		puts("  ⬆		| Move up");
-		puts("  ⬇		| Move down");
-		puts("  <->		| Move left|right");
-		puts("  r		| change colors to "RED"red"WHT);
-		puts("  g		| change colors to "GRN"green"WHT);
-		puts("  b		| change colors to "BLU"blue"WHT);
-		puts("  h		| Show help");
-		puts("  mouse wheel	| Zoom in and out");
-		puts(YEL "\n Key Hooks (Julia set)\n");
-		puts(WHT"  z + mouse mvt	| change values to show different sets");
+		print_help();
+	fractol_loop(frctl);
+}
 
-	}
-	if (keydata.key == MLX_KEY_Z && keydata.action == MLX_REPEAT)
+void	move(keys_t key, t_fractol *frctl)
+{
+	t_complex	c_size;
+
+	c_size.re = frctl->c_max.re - frctl->c_min.re;
+	c_size.im = frctl->c_max.im - frctl->c_min.im;
+	if (key == MLX_KEY_UP)
 	{
-		mlx_cursor_hook(fr_data->mlx, &my_mouse_pos, fr_data);
-		printf("c_re : %f, c_im : %f\n", fr_data->c_re, fr_data->c_im);
-		if ((fr_data->c_re > -2 && fr_data->c_re < 2) || (fr_data->c_im > -2 && fr_data->c_im < 2))
-			fr_data->f(fr_data);
+		frctl->c_min.im += c_size.im * 0.05;
+		frctl->c_max.im += c_size.im * 0.05;
 	}
-	if (keydata.key == MLX_KEY_N && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	else if (key == MLX_KEY_DOWN)
 	{
-		pi = 0;
-		while (pi > 0.00 || pi < 3.14)
+		frctl->c_min.im -= c_size.im * 0.05;
+		frctl->c_max.im -= c_size.im * 0.05;
+	}
+	else if (key == MLX_KEY_LEFT)
+	{
+		frctl->c_min.re -= c_size.re * 0.05;
+		frctl->c_max.re -= c_size.re * 0.05;
+	}
+	else if (key == MLX_KEY_RIGHT)
+	{
+		frctl->c_min.re += c_size.re * 0.05;
+		frctl->c_max.re += c_size.re * 0.05;
+	}
+}
+
+void	change_maxiter(keys_t key, t_fractol *frctl)
+{
+	if (key == MLX_KEY_I)
+	{
+		if (frctl->max_iter == 5000)
+			return ;
+		else if (frctl->max_iter < 50)
+			frctl->max_iter += 1;
+		else if (frctl->max_iter < 5000)
 		{
-			fr_data->c_re = 0.7885 * cos(pi);
-			fr_data->c_im = 0.7885 * sin(pi);
-			pi += 1;
+			frctl->max_iter = (int)(frctl->max_iter * 1.05);
+			if (frctl->max_iter > 5000)
+				frctl->max_iter = 5000;
 		}
-		fr_data->f(fr_data);
-		//pi = 0;
-		//z^2 + 0.7885e^ia
-		// where a range from 0 to 2*pi
-
-		/*
-		double a, real_z, imag_z, real_c, imag_c;
-
-		for (a = 0; a <= 2 * M_PI; a += 0.01) {
-			real_c = 0.7885 * cos(a);
-			imag_c = 0.7885 * sin(a);
-
-			double real_temp = real_z * real_z - imag_z * imag_z + real_c;
-			imag_z = 2 * real_z * imag_z + imag_c;
-			real_z = real_temp;
-
-			printf("%f + %fi\n", real_z, imag_z);
-
-			In this example, the variable a is used to iterate through the range of 0 to 2 * pi. 
-			The constant c is represented by two separate variables, c_re and c_im,
-			which are defined as 0.7885 * cos(a) and 0.7885 * sin(a) respectively using the cos() and sin() functions.
-			 
-			The variable z_re and z_im represent the real and imaginary parts of z respectively. 
-			Then, the equation z^2 + c is implemented using the basic arithmetic operations and the variables 
-			are updated accordingly. Finally, the real and imaginary parts of z are printed.
-
-			As with the previous example, this is just a rough example, you will need to decide the number of iterations, 
-			the range of a and the starting point of z to obtain the desired output. 
-			Also, the above code will only give a point of the Julia set, you can use a library like libpng to draw 
-			the Julia set on the screen, or use an array to store the values of z in order to draw the set later.
-		*/
-	}	
-}
-
-void my_scrollhook(double xdelta, double ydelta, void* param)
-{
-	t_fr_data	*fr_data;
-	
-	fr_data = (t_fr_data *)param;
-	if (ydelta > 0)
-	{
-		fr_data->ymin *= 0.9;
-		fr_data->ymax *= 0.9;
-		fr_data->xmin *= 0.9;
-		fr_data->xmax *= 0.9;
-		fr_data->f(fr_data);
-	}	
-	else if (ydelta < 0)
-	{
-		fr_data->ymin *= 1.1;
-		fr_data->ymax *= 1.1;
-		fr_data->xmin *= 1.1;
-		fr_data->xmax *= 1.1;
-		fr_data->f(fr_data);
 	}
-}
-
-/*
-void my_mouse_pos(double xmouse, double ymouse, void* param)
-{
-	t_fr_data	*fr_data;
-	fr_data = (t_fr_data *)param;
-	static int x;
-	static int y;
-	
-	fr_data = (t_fr_data *)param;
-	mlx_get_mouse_pos(fr_data->mlx, &x, &y);
-	if (x != fr_data->x1 || y != fr_data->y1)
-	{		
-		fr_data->x1 = x;
-		fr_data->y1 = y;
-		//return (1);
+	else if (key == MLX_KEY_O)
+	{
+		if (frctl->max_iter > 50)
+			frctl->max_iter = frctl->max_iter * 0.95;
+		else if (frctl->max_iter > 1)
+			frctl->max_iter -= 1;
 	}
-	// return (0);
-	
-}
-*/
-
-void	my_mouse_pos(double xpos, double ypos, void* param)
-{
-	t_fr_data	*fr_data;
-	
-	fr_data = (t_fr_data *)param;
-	fr_data->c_re = xpos / fr_data->img_width;
-	fr_data->c_im = ypos / fr_data->img_height;
-	//printf("x : %f, y : %f\n", xpos, ypos);
-	// fr_data->c_re = (sin(xpos) + 1) * 2 - 2;
-	// fr_data->c_im = (sin(xpos) + 1) * 2 - 2;
+	set_color_array(frctl);
 }

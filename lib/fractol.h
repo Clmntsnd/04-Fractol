@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
+/*   Updated: 2023/01/30 14:19:51 by csenand          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -13,67 +25,80 @@
 #define YEL "\x1B[33m"
 #define WIDTH 800
 #define HEIGHT 640
-#define IM_RATIO
-// #define IMG_WIDTH 640
-// #define IMG_HEIGHT 800
 
-typedef struct s_fr_data
+typedef struct s_fractol	t_fractol;
+typedef void	(*t_funcptr)(t_fractol *frctl);
+
+// Struct that stocks complex nbr
+typedef struct s_complex
 {
-	// double		x;
-	// double		y;
-	int			xp;
-	int			yp;
-	double		x1;
-	double		y1;
-	double		i;
-	double		j;
-	int			img_width;
-	int			img_height;
-	double		im_ratio;
-	double 		re_av;
-	double 		im_av;
-	double		xmin;
-	double		xmax;
-	double		ymin;
-	double		ymax;
-	double		zx;
-	double		zy;
-	double		c_re;
-	double		c_im;
-	double		new_re;
-	double		new_im;
-	int			iter;
-	int			max_iter;
-	double 		re_factor;
-	double 		im_factor;
+	double	re;
+	double	im;
+}	t_complex;
+
+// Struct that stocks req'd MLX ptr in ordeer to launch
+// typedef struct	s_mlx 
+// {
+// 	mlx_image_t	*img;
+// 	mlx_t 		*mlx;
+// }				t_mlx;
+
+// Struct principale
+
+typedef struct s_fractol 
+{
+	t_complex	c;
+	t_complex	c_julia;
+	t_complex	c_max;
+	t_complex	c_min;
+	t_complex	scale;
+	size_t		iter;
+	size_t		max_iter;
+	t_funcptr	frctl_fct;
 	mlx_image_t	*img;
 	mlx_t 		*mlx;
-	void (*f)(struct s_fr_data *);
+	uint8_t		color_shift;
+	int			*color_scheme;
+	//bool		is_fixed;
+}	t_fractol;
 
-}				t_fr_data;
+/*
+**	Main Functions
+*/
+int			fractol(int argc, char *argv[]);
+t_fractol	*frctl_init(int argc, char *argv[]);
+int			set_defaults(t_fractol *frctl);
+void 		get_arg(int argc, char **argv, t_fractol *frctl);
+int			fractol_loop(t_fractol *frctl);
+void		setup_mlx(t_fractol *frctl);
 
-typedef struct s_pixel_thread_params
-{
-    int x;
-    int y;
-    t_fr_data* fr_data;
-}			t_pixel_thread_params;
+/*
+**	Calcul Functions
+*/
+void		complex_set(t_complex *z, double re, double im);
+void		ft_julia(t_fractol *frctl);
+void		ft_mandelbrot(t_fractol *frctl);
 
-int	get_rgba(int r, int g, int b, int a);
-uint32_t set_color(int c);
+/*
+**	Color Functions
+*/
+int			calc_color(t_fractol *frctl, size_t i);
+int			get_color(t_fractol *frctl);
+void		set_color_array(t_fractol *frctl);
 
-void	ft_mandelbrot(t_fr_data *fr_data);
-// void	ft_julia(t_fr_data *fr_data);
-void* calculate_pixel(void* arg);
-void ft_julia(t_fr_data *fr_data);
+/*
+**	Hooks
+*/
+void		my_keyhook(mlx_key_data_t keydata, t_fractol *frctl);
+void		move(keys_t key, t_fractol *frctl);
+void		change_maxiter(keys_t key, t_fractol *frctl);
 
-double 	my_atof(char* str);
-
-int			print_usage(void);
-t_fr_data	*get_data(char c, char *arg1, char *arg2);
-
-void	my_keyhook(mlx_key_data_t keydata, void *param);
-void 	my_scrollhook(double xdelta, double ydelta, void* param);
-void	my_mouse_pos(double xpos, double ypos, void* param);
+/*
+**	Print Functions
+*/
+void		print_usage(void);
+void		print_help(void);
+double 		my_atof(const char *str);
+void 		arg_usage (int flag);
 
 #endif
