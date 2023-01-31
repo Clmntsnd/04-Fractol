@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 16:25:56 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/30 22:48:58 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,10 @@ void	print_help(void)
 	printf("  mouse wheel	| Zoom in and out");
 	printf(YEL "\n Key Hooks (Julia set)\n");
 	printf(WHT"  c + mouse mvt	| change values to show different sets");
+}
+
+void arg_usage(int flag)
+{
+	if (flag == 0)
+		printf("Missing two others args");
 }

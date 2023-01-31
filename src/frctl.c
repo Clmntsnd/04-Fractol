@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 10:40:03 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 21:10:37 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/30 22:48:01 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	fractol_loop(t_fractol *frctl)
 		}
 		mlx_put_pixel(frctl->img, x, y, get_color(frctl));
 	}
+	// mlx_image_to_window(frctl->mlx, frctl->img, x, y);
 }
