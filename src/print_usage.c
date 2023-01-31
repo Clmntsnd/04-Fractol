@@ -6,15 +6,15 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 10:09:02 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:24:03 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
 
-void print_usage(void)
+void	print_usage(void)
 {
-	printf(RED "\n❌ Uh oh" WHT ", something is missing! See Below.\n\n" WHT);
+	printf(RED "\n❌ Uh oh" WHT ", something went wrong! See Below.\n\n" WHT);
 	printf(GRN "✅ Usage :" WHT " ./fractol " RED "[fractal_set_nb]\n\n");
 	printf(YEL "📝 Available Sets\n");
 	printf("  --> 1️⃣  Mandelbrot\n");
@@ -27,21 +27,21 @@ void print_usage(void)
 
 void	print_help(void)
 {
-	printf(YEL "\n Key Hooks (all sets)\n");
-	printf(WHT "  esc		| Quit program");
-	printf("  ⬆		| Move up");
-	printf("  ⬇		| Move down");
-	printf("  <->		| Move left|right");
-	printf("  r		| change colors to "RED"red"WHT);
-	printf("  g		| change colors to "GRN"green"WHT);
-	printf("  b		| change colors to "BLU"blue"WHT);
-	printf("  h		| Show help");
-	printf("  mouse wheel	| Zoom in and out");
-	printf(YEL "\n Key Hooks (Julia set)\n");
-	printf(WHT"  c + mouse mvt	| change values to show different sets");
+	printf(YEL "\n Key Hooks (all sets)\n\n");
+	printf(WHT "  esc		| Quit program\n");
+	printf("  ⬆		| Move up\n");
+	printf("  ⬇		| Move down\n");
+	printf("  <->		| Move left|right\n");
+	printf("  r		| change colors to "RED"red\n"WHT);
+	printf("  g		| change colors to "GRN"green\n"WHT);
+	printf("  b		| change colors to "BLU"blue\n"WHT);
+	printf("  h		| Show help\n");
+	printf("  mouse wheel	| Zoom in and out\n");
+	printf(YEL "\n Key Hooks (Julia set)\n\n");
+	printf(WHT"  c + mouse mvt	| change values to show different sets\n");
 }
 
-void arg_usage(int flag)
+void	arg_usage(int flag)
 {
 	if (flag == 0)
 		printf("Missing two others args");

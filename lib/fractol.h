@@ -6,18 +6,18 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 14:42:59 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:25:40 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <pthread.h>
+# include "../lib/MLX42/include/MLX42/MLX42.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <math.h>
+# include <pthread.h>
 # define RED "\x1B[31m"
 # define GRN "\x1B[32m"
 # define BLU "\x1B[34m"
@@ -46,20 +46,10 @@
 // }				t_mlx;
 
 // Struct principale
-typedef struct s_fractol 
+typedef struct s_fractol
 {
-	// double		c;
-	// double		c_julia;
-	// double		c_max;
-	// double		c_min;
-	// double		scale;
-	// size_t		iter;
-	// size_t		max_iter;
-	// uint8_t		color_shift;
-	// int			*color_scheme;
-
 	mlx_image_t	*img;
-	mlx_t 		*mlx;
+	mlx_t		*mlx;
 	int			color;
 	int			*color_scheme;
 	uint8_t		color_shift;
@@ -70,7 +60,6 @@ typedef struct s_fractol
 	int			frctl_fct;
 	int			iter;
 	int			iter_max;
-	int			show_text;
 	double		zoom;
 	double		x1;
 	double		y1;
@@ -114,12 +103,13 @@ void	julia_pthread(t_fractol *frctl);
 **	Hooks & related functions
 */
 void	my_keyhook(mlx_key_data_t keydata, t_fractol *frctl);
+// void	move(keys_t key, t_fractol *frctl);
 
 
 /*
 **	Print Functions
 */
-void	print_usage (void);
+void	print_usage(void);
 void	print_help(void);
 
 #endif

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 15:45:35 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/31 16:22:20 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
-#include
 
 void	fract_calc(t_fractol *frctl)
 {
@@ -32,7 +31,7 @@ void	fract_init(t_fractol *frctl)
 	fract_calc(frctl);
 }
 
-static void ft_error(void)
+static	void	ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
@@ -48,7 +47,7 @@ void	mlx_setup(t_fractol *frctl)
 		ft_error();
 }
 
-int		fract_sets(char **argv, t_fractol *frctl)
+int	fract_sets(char **argv, t_fractol *frctl)
 {
 	if (argv[1][0] == '1' && !argv[1][1])
 		frctl->frctl_fct = 0;
@@ -79,7 +78,7 @@ int	main(int argc, char *argv[])
 			// return (-1);
 		}
 		fract_init(frctl);
-		// mlx_key_hook(data->mlx, &my_keyhook, data);
+		mlx_key_hook(frctl->mlx, &my_keyhook, frctl);
 		// mlx_scroll_hook(data->mlx, &my_scrollhook, data);
 		mlx_loop(frctl->mlx);
 		mlx_terminate(frctl->mlx);

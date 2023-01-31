@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 14:51:29 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:23:49 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	mandelbrot_init(t_fractol *frctl)
 	frctl->zoom = 300;
 	frctl->x1 = -2.05;
 	frctl->y1 = -1.3;
-	frctl->color = 255;
+	frctl->color = 500;
 }
 
 void	mandelbrot_calc(t_fractol *frctl)
@@ -30,24 +30,24 @@ void	mandelbrot_calc(t_fractol *frctl)
 	frctl->z_i = 0;
 	frctl->iter = 0;
 	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4 
-			&& frctl->iter < frctl->iter_max)
+		&& frctl->iter < frctl->iter_max)
 	{
 		frctl->tmp = frctl->z_r;
-		frctl->z_r = pow(frctl->z_r, 2) -
-			pow(frctl->z_i, 2) + frctl->c_r;
+		frctl->z_r = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
 		frctl->z_i = 2 * frctl->z_i * frctl->tmp + frctl->c_i;
 		frctl->iter++;
 	}
 	if (frctl->iter == frctl->iter_max)
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, 0x000000);
 	else
-		mlx_put_pixel(frctl->img, frctl->x, frctl->y, (frctl->color * frctl->iter));
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y,
+			(frctl->color * frctl->iter));
 }
 
 void	*mandelbrot(void *param)
 {
 	t_fractol	*frctl;
-	int		tmp;
+	int			tmp;
 
 	frctl = (t_fractol *)param;
 	frctl->x = 0;
@@ -74,7 +74,8 @@ void	mandelbrot_pthread(t_fractol *frctl)
 	i = 0;
 	while (i < THREAD_NUMBER)
 	{
-		memcpy((void*)&param[i], (void*)frctl, sizeof(t_fractol));
+		// ATTENTION use my version of memcpy
+		memcpy((void *)&param[i], (void *)frctl, sizeof(t_fractol));
 		param[i].y = THREAD_WIDTH * i;
 		param[i].y_max = THREAD_WIDTH * (i + 1);
 		pthread_create(&t[i], NULL, mandelbrot, &param[i]);

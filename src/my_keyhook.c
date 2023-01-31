@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:12:18 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 13:45:39 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/31 16:12:35 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,21 @@
 
 void	my_keyhook(mlx_key_data_t keydata, t_fractol *frctl)
 {
-	// if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-	// 	exit(0);
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		exit(0);
 	// else if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
 	// 	move(keydata.key, frctl);
 	// else if (keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 	// 	move(keydata.key, frctl);
 	// else if (keydata.key == MLX_KEY_I || keydata.key == MLX_KEY_O)
 	// 	change_maxiter(keydata.key, frctl);
-	if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
+	else if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
 		print_help();
-	fract_calc(frctl);
+	// fract_calc(frctl);
 }
 
 // void	move(keys_t key, t_fractol *frctl)
 // {
-// 	t_complex	c_size;
-
 // 	c_size.re = frctl->c_max.re - frctl->c_min.re;
 // 	c_size.im = frctl->c_max.im - frctl->c_min.im;
 // 	if (key == MLX_KEY_UP)
