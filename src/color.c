@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:59:12 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 14:03:05 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:25:17 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
 int	calc_color(t_fractol *frctl, size_t i)

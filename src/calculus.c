@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   calculus.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 10:56:43 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 13:30:47 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:25:11 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
 /*

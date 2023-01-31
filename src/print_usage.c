@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   print_usage.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 13:31:04 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:25:56 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
 void print_usage(void)

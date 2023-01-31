@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   my_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:12:18 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 14:32:30 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:25:52 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
 void	my_keyhook(mlx_key_data_t keydata, t_fractol *frctl)

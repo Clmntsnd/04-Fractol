@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:41:08 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 14:52:47 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/30 21:32:28 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
 /*
@@ -22,15 +21,20 @@ t_fractol	*frctl_init(int argc, char *argv[])
 {
 	t_fractol	*frctl;
 
-	if (!(frctl = malloc(sizeof(t_fractol))))
+	frctl = malloc(sizeof(t_fractol));
+	if (!frctl)
 		return (NULL);
 	frctl->color_scheme = malloc((5000 + 1) * sizeof(int));
-	// if (frctl->color_scheme == NULL)
+	if (!(frctl->color_scheme))
+		return (NULL);
 	// 	fractol_free_kill_all(frctl);
 	frctl->color_shift = 0;
+	// sets default values
 	set_defaults(frctl);
+	//set which sets to display
 	get_arg(argc, argv, frctl); 
-	return (frctl); //retourne la struct modified
+	// return modified struct
+	return (frctl);
 }
 
 /*
@@ -38,23 +42,25 @@ Fct that sets the default parmaters req'd
 */
 int	set_defaults(t_fractol *frctl)
 {
-	frctl->max_iter = 28;
+	t_complex *z;
+	
+	frctl->max_iter = 50;
 	complex_set(&frctl->c_min, -2.0, -2.0);
 	frctl->c_max.im = 2;
 	frctl->c_max.re = (WIDTH / HEIGHT
 			* (frctl->c_max.im - frctl->c_min.im)
 			+ frctl->c_min.re);
-	//complex_set(&frctl->c_julia, -0.6, 0.6); 
+	complex_set(&frctl->c_julia, -0.6, 0.6); 
 	set_color_array(frctl);
 	return (0);
 }
 
 void get_arg(int argc, char **argv, t_fractol *frctl)
 {
-	frctl->frctl_fct = NULL;
+	// frctl->frctl_fct = NULL;
 	if (argc == 1)
 		print_usage();
-	else if (argv[1][0] == '2' && argv[1][1] == '\0')
+	if (argv[1][0] == '2' && argv[1][1] == '\0')
 	{
 		frctl->frctl_fct = ft_julia;
 		if (argc == 4)
@@ -66,7 +72,8 @@ void get_arg(int argc, char **argv, t_fractol *frctl)
 			arg_usage(0); //to modify
 	}
 	else if (argv[1][0] == '1' && argv[1][1] == '\0')
-		frctl->frctl_fct = ft_mandelbrot;
+		// frctl->frctl_fct = &ft_mandelbrot;
+		puts("mandelbrot");
 	else
 		print_usage();
 }

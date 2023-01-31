@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 14:19:51 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/30 21:10:46 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ typedef struct s_fractol
 /*
 **	Main Functions
 */
-int			fractol(int argc, char *argv[]);
+// int			fractol(int argc, char *argv[]);
 t_fractol	*frctl_init(int argc, char *argv[]);
 int			set_defaults(t_fractol *frctl);
 void 		get_arg(int argc, char **argv, t_fractol *frctl);
-int			fractol_loop(t_fractol *frctl);
+void		fractol_loop(t_fractol *frctl);
 void		setup_mlx(t_fractol *frctl);
 
 /*

@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   frctl_sets.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:31:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 13:30:52 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:25:39 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
 #include "../lib/fractol.h"
 
 void	ft_mandelbrot(t_fractol *frctl)
