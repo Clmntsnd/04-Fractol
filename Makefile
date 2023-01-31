@@ -30,8 +30,7 @@ RUN = ./fractol 1
 OBJS = ${SRC:.c=.o}
 
 # -- Sources -- #
-SRC = 	./src/calculus.c ./src/color.c ./src/frctl.c ./src/frctl_sets.c ./src/main.c ./src/my_keyhook.c \
-	 	./src/utils.c ./src/print_usage.c ./src/inits.c
+SRC = 	./src/julia.c ./src/main.c ./src/mandelbrot.c ./src/my_keyhook.c ./src/print_usage.c
 
 # -- Colors -- #
 BLACK = \033[0;30m
