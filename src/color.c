@@ -6,13 +6,13 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:59:12 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 16:25:17 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/30 23:18:10 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
 
-int	calc_color(t_fractol *frctl, size_t i)
+static int	calc_color(t_fractol *frctl, size_t i)
 {
 	uint8_t	cs;
 	uint8_t	rgb[3];

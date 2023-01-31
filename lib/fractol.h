@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 22:55:37 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/30 23:20:56 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,11 @@ void		ft_mandelbrot(t_fractol *frctl);
 /*
 **	Color Functions
 */
-int			calc_color(t_fractol *frctl, size_t i);
 int			get_color(t_fractol *frctl);
 void		set_color_array(t_fractol *frctl);
 
 /*
-**	Hooks
+**	Hooks & related functions
 */
 void		my_keyhook(mlx_key_data_t keydata, t_fractol *frctl);
 void		move(keys_t key, t_fractol *frctl);
