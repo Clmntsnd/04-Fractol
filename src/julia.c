@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 16:21:52 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/31 20:00:48 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,43 +26,45 @@ int	mouse_julia(int x, int y, t_fractol *frctl)
 
 void	julia_init(t_fractol *frctl)
 {
-	frctl->iter_max = 50;
+	frctl->iter_max = 28;
 	frctl->zoom = 200;
-	frctl->x1 = -2.0;
-	frctl->y1 = -1.9;
-	frctl->color = 500;
-	frctl->c_r = 0.285;
-	frctl->c_i = 0.01;
+	frctl->xmin = -1.5;
+	frctl->xmax = 1.5;
+	frctl->ymin = -1.5;
+	frctl->ymax = 1.5;
+	frctl->c_r = -0.70176;
+	frctl->c_i = 0.3842;
 	frctl->julia_mouse = 1;
 }
 
 void	julia_calc(t_fractol *frctl)
 {
-	frctl->z_r = frctl->x / frctl->zoom + frctl->x1;
-	frctl->z_i = frctl->y / frctl->zoom + frctl->y1;
 	frctl->iter = 0;
 	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4 
 		&& frctl->iter < frctl->iter_max)
 	{
-		frctl->tmp = frctl->z_r;
-		frctl->z_r = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) - 0.8
-			+ (frctl->c_r / WIDTH);
-		frctl->z_i = 2 * frctl->z_i * frctl->tmp + (frctl->c_i / WIDTH);
+		frctl->new_re = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
+		frctl->new_im = 2 * frctl->z_i * frctl->z_r + frctl->c_i;
+		frctl->z_r = frctl->new_re;
+		frctl->z_i = frctl->new_im;
 		frctl->iter++;
 	}
 	if (frctl->iter == frctl->iter_max)
-		mlx_put_pixel(frctl->img, frctl->x, frctl->y, 0x000000);
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y, 0xFF);
 	else
-		mlx_put_pixel(frctl->img, frctl->x, frctl->y,
-			(frctl->color * frctl->iter));
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter));
 }
 
 void	*julia(void *param)
 {
 	t_fractol	*frctl;
 	int			tmp;
+	double		xdelta;
+	double		ydelta;
 
 	frctl = (t_fractol *)param;
+	xdelta = frctl->xmax - frctl->xmin;
+	ydelta = frctl->ymax - frctl->ymin;
 	frctl->x = 0;
 	tmp = frctl->y;
 	while (frctl->x < WIDTH)
@@ -70,6 +72,8 @@ void	*julia(void *param)
 		frctl->y = tmp;
 		while (frctl->y < frctl->y_max)
 		{
+			frctl->z_r = frctl->xmin + frctl->x * xdelta / WIDTH;
+			frctl->z_i = frctl->ymin + frctl->y * ydelta / HEIGHT;
 			julia_calc(frctl);
 			frctl->y++;
 		}

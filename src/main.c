@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 16:22:20 by csenand          ###   ########.fr       */
+/*   Updated: 2023/01/31 19:22:44 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char *argv[])
 		}
 		fract_init(frctl);
 		mlx_key_hook(frctl->mlx, &my_keyhook, frctl);
-		// mlx_scroll_hook(data->mlx, &my_scrollhook, data);
+		mlx_scroll_hook(frctl->mlx, &my_scrollhook, frctl);
 		mlx_loop(frctl->mlx);
 		mlx_terminate(frctl->mlx);
 		return (EXIT_SUCCESS);
