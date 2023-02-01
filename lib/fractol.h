@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:44:08 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/01 17:56:54 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_fractol
 	double		new_r;
 	double		new_i;
 	double		tmp;
-	int			n;
+	double			n;
 }	t_fractol;
 
 /*

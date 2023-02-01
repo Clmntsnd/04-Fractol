@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:30:58 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:23:59 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/01 17:57:35 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	buddhabrot_calc(t_fractol *frctl)
 	{
 		if (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) > 4.0)
 			break;
-		frctl->new_re = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
-		frctl->new_im = 2 * frctl->z_i * frctl->z_r + frctl->c_i;
-		frctl->z_r = frctl->new_re;
-		frctl->z_i = frctl->new_im;
+		frctl->new_r = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
+		frctl->new_i = 2 * frctl->z_i * frctl->z_r + frctl->c_i;
+		frctl->z_r = frctl->new_r;
+		frctl->z_i = frctl->new_i;
 		frctl->iter++;
 		// frctl->x = frctl->iter;
 		// frctl->y = frctl->iter;

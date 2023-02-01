@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:51:49 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/01 17:59:28 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	julia_multi_init(t_fractol *frctl)
 	frctl->ymax = 2;
 	frctl->c_r = -0.8;
 	frctl->c_i = 0.156;
-	frctl->n = 10;
+	frctl->n = 10.0;
 }
 
 void	julia_multi_calc(t_fractol *frctl)
 {
 	
 	frctl->iter = 0;
-	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4 
+	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 20 
 		&& frctl->iter < frctl->iter_max)
 	{
 		frctl->new_r = pow((pow(frctl->z_r, 2) + pow(frctl->z_i, 2)), (frctl->n / 2)) * cos(frctl->n * atan2(frctl->z_i, frctl->z_r)) + frctl->c_r;
