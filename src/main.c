@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 21:38:07 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:47:36 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	fract_calc(t_fractol *frctl)
 		mandelbrot_pthread(frctl);
 	else if (frctl->frctl_fct == 2)
 		julia_pthread(frctl);
+	else if (frctl->frctl_fct == 3)
+		buddhabrot_pthread(frctl);
+	else if (frctl->frctl_fct == 4)
+		julia_multi_pthread(frctl);
 }
 
 void	fract_init(t_fractol *frctl)
@@ -28,6 +32,10 @@ void	fract_init(t_fractol *frctl)
 		mandelbrot_init(frctl);
 	else if (frctl->frctl_fct == 2)
 		julia_init(frctl);
+	else if (frctl->frctl_fct == 3)
+		buddhabrot_init(frctl);
+	else if (frctl->frctl_fct == 4)
+		julia_multi_init(frctl);
 	fract_calc(frctl);
 }
 
@@ -51,8 +59,12 @@ int	fract_sets(char **argv, t_fractol *frctl)
 {
 	if (argv[1][0] == '1')
 		frctl->frctl_fct = 1;
-	else if (argv[1][0] == '2' && argv[1][1] == '\0')
+	else if (argv[1][0] == '2')
 		frctl->frctl_fct = 2;
+	else if (argv[1][0] == '3')
+		frctl->frctl_fct = 3;
+	else if (argv[1][0] == '4')
+		frctl->frctl_fct = 4;
 	else
 		print_usage();
 	return (1);

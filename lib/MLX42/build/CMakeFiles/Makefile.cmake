@@ -35,7 +35,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Users/csenand/.brew/lib/cmake/glfw3/glfw3ConfigVersion.cmake"
   "/Users/csenand/.brew/lib/cmake/glfw3/glfw3Targets-release.cmake"
   "/Users/csenand/.brew/lib/cmake/glfw3/glfw3Targets.cmake"
-  "/Users/csenand/Desktop/04-Fractol/lib/MLX42/CMakeLists.txt"
+  "/Users/csenand/Documents/04-Fractol/lib/MLX42/CMakeLists.txt"
   "CMakeFiles/3.25.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.25.2/CMakeSystem.cmake"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 22:08:36 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:44:08 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ typedef struct s_fractol
 {
 	mlx_image_t	*img;
 	mlx_t		*mlx;
-	// int			*color_scheme;
-	// uint8_t		color_shift;
-	int			julia_mouse;
 	int			x;
 	int			y;
 	int			y_max;
@@ -51,9 +48,10 @@ typedef struct s_fractol
 	double		c_i;
 	double		z_r;
 	double		z_i;
-	double		new_re;
-	double		new_im;
+	double		new_r;
+	double		new_i;
 	double		tmp;
+	int			n;
 }	t_fractol;
 
 /*
@@ -79,6 +77,16 @@ void		julia_init(t_fractol *frctl);
 void		julia_calc(t_fractol *frctl);
 void		*julia(void *param);
 void		julia_pthread(t_fractol *frctl);
+
+void		buddhabrot_init(t_fractol *frctl);
+void		buddhabrot_calc(t_fractol *frctl);
+void 		*buddhabrot(void *param);
+void		buddhabrot_pthread(t_fractol *frctl);
+
+void		julia_multi_init(t_fractol *frctl);
+void		julia_multi_calc(t_fractol *frctl);
+void		*julia_multi(void *param);
+void		julia_multi_pthread(t_fractol *frctl);
 
 /*
 **	Color Functions

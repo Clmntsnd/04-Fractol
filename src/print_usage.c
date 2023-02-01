@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_usage.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 22:35:28 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:19:43 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	print_help(void)
 	printf("  ⬆		| Move up\n");
 	printf("  ⬇		| Move down\n");
 	printf("  <->		| Move left|right\n");
-	printf("  r		| reset to default parameters");
+	printf("  r		| reset to default parameters\n");
 	printf("  h		| Show help\n");
 	printf("  mouse wheel	| Zoom in and out\n");
 	printf(YEL "\n Key Hooks (Julia set)\n\n");
-	printf(WHT"  c + mouse mvt	| change values to show different sets\n");
+	printf(WHT"  z + mouse mvt	| change values to show different sets\n");
 }
 
 void	arg_usage(int flag)

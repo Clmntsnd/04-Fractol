@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia_multi.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:38:23 by csenand          ###   ########.fr       */
+/*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
+/*   Updated: 2023/02/01 17:51:49 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 //ATTENTION replace memcpy by ft_memcpy
 #include <string.h>
 
-void	mandelbrot_init(t_fractol *frctl)
+void	julia_multi_init(t_fractol *frctl)
 {
-	frctl->iter_max = 50;
-	frctl->zoom = 300;
+	frctl->iter_max = 28;
+	frctl->zoom = 200;
 	frctl->xmin = -2;
-	frctl->xmax = 1.2;
-	frctl->ymin = -1.2;
-	frctl->ymax = 1.2;
+	frctl->xmax = 2;
+	frctl->ymin = -2;
+	frctl->ymax = 2;
+	frctl->c_r = -0.8;
+	frctl->c_i = 0.156;
+	frctl->n = 10;
 }
 
-void	mandelbrot_calc(t_fractol *frctl)
+void	julia_multi_calc(t_fractol *frctl)
 {
-	frctl->z_r = 0;
-	frctl->z_i = 0;
+	
 	frctl->iter = 0;
-	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4
+	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4 
 		&& frctl->iter < frctl->iter_max)
 	{
-		frctl->new_r = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
-		frctl->new_i = 2 * frctl->z_i * frctl->z_r + frctl->c_i;
+		frctl->new_r = pow((pow(frctl->z_r, 2) + pow(frctl->z_i, 2)), (frctl->n / 2)) * cos(frctl->n * atan2(frctl->z_i, frctl->z_r)) + frctl->c_r;
+		frctl->new_i = pow((pow(frctl->z_r, 2) + pow(frctl->z_i, 2)), (frctl->n / 2)) * sin(frctl->n * atan2(frctl->z_i, frctl->z_r)) + frctl->c_i;	
 		frctl->z_r = frctl->new_r;
 		frctl->z_i = frctl->new_i;
 		frctl->iter++;
@@ -43,8 +45,8 @@ void	mandelbrot_calc(t_fractol *frctl)
 	else
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter));
 }
-
-void	*mandelbrot(void *param)
+  
+void	*julia_multi(void *param)
 {
 	t_fractol	*frctl;
 	int			tmp;
@@ -54,16 +56,16 @@ void	*mandelbrot(void *param)
 	frctl = (t_fractol *)param;
 	xdelta = frctl->xmax - frctl->xmin;
 	ydelta = frctl->ymax - frctl->ymin;
-	tmp = frctl->y;
 	frctl->x = 0;
+	tmp = frctl->y;
 	while (frctl->x < WIDTH)
 	{
 		frctl->y = tmp;
 		while (frctl->y < frctl->y_max)
 		{
-			frctl->c_r = frctl->xmin + frctl->x * xdelta / WIDTH;
-			frctl->c_i = frctl->ymin + frctl->y * ydelta / HEIGHT;
-			mandelbrot_calc(frctl);
+			frctl->z_r = frctl->xmin + frctl->x * xdelta / WIDTH;
+			frctl->z_i = frctl->ymin + frctl->y * ydelta / HEIGHT;
+			julia_multi_calc(frctl);
 			frctl->y++;
 		}
 		frctl->x++;
@@ -71,7 +73,7 @@ void	*mandelbrot(void *param)
 	return (param);
 }
 
-void	mandelbrot_pthread(t_fractol *frctl)
+void	julia_multi_pthread(t_fractol *frctl)
 {
 	t_fractol	param[THREAD_NUMBER];
 	pthread_t	t[THREAD_NUMBER];
@@ -80,11 +82,11 @@ void	mandelbrot_pthread(t_fractol *frctl)
 	i = 0;
 	while (i < THREAD_NUMBER)
 	{
-		// ATTENTION use my version of memcpy
-		memcpy((void *)&param[i], (void *)frctl, sizeof(t_fractol));
+		memcpy((void *)&param[i], (void *)frctl,
+			sizeof(t_fractol));
 		param[i].y = THREAD_WIDTH * i;
 		param[i].y_max = THREAD_WIDTH * (i + 1);
-		pthread_create(&t[i], NULL, mandelbrot, &param[i]);
+		pthread_create(&t[i], NULL, julia, &param[i]);
 		i++;
 	}
 	while (i--)

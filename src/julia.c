@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 22:33:46 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:37:12 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
+//ATTENTION replace memcpy by ft_memcpy
 #include <string.h>
 
 void	julia_init(t_fractol *frctl)
@@ -21,9 +22,8 @@ void	julia_init(t_fractol *frctl)
 	frctl->xmax = 1.5;
 	frctl->ymin = -1.5;
 	frctl->ymax = 1.5;
-	frctl->c_r = 0;
-	frctl->c_i = 0.8;
-	frctl->julia_mouse = 1;
+	frctl->c_r = -0.8;
+	frctl->c_i = 0.156;
 }
 
 void	julia_calc(t_fractol *frctl)
@@ -32,10 +32,10 @@ void	julia_calc(t_fractol *frctl)
 	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4 
 		&& frctl->iter < frctl->iter_max)
 	{
-		frctl->new_re = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
-		frctl->new_im = 2 * frctl->z_i * frctl->z_r + frctl->c_i;
-		frctl->z_r = frctl->new_re;
-		frctl->z_i = frctl->new_im;
+		frctl->new_r = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
+		frctl->new_i = 2 * frctl->z_i * frctl->z_r + frctl->c_i;
+		frctl->z_r = frctl->new_r;
+		frctl->z_i = frctl->new_i;
 		frctl->iter++;
 	}
 	if (frctl->iter == frctl->iter_max)
@@ -43,7 +43,7 @@ void	julia_calc(t_fractol *frctl)
 	else
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter));
 }
-
+  
 void	*julia(void *param)
 {
 	t_fractol	*frctl;
