@@ -20,8 +20,7 @@ MAC_AIR = -I /include -lglfw -L "/opt/homebrew/Cellar/glfw/3.3.8/lib" -pthread
 RM = rm -f
 
 # -- MLX42 LIB -- #
-CLONE = git clone https://github.com/codam-coding-college/MLX42.git lib/MLX42;
-MLX = ./lib/MLX42/libmlx42.a
+MLX = ./lib/MLX42/build/libmlx42.a
 
 # -- RUN -- #
 RUN = ./fractol 1
@@ -30,7 +29,7 @@ RUN = ./fractol 1
 OBJS = ${SRC:.c=.o}
 
 # -- Sources -- #
-SRC = 	./src/julia.c ./src/colors.c ./src/main.c ./src/mandelbrot.c ./src/my_keyhook.c ./src/print_usage.c
+SRC = ./src/julia.c ./src/colors.c ./src/main.c ./src/mandelbrot.c ./src/my_keyhook.c ./src/print_usage.c
 
 # -- Colors -- #
 BLACK = \033[0;30m
@@ -58,29 +57,19 @@ $(NAME): ${OBJS} ./lib/fractol.h
 	@echo "🎉$(GREEN)Everything compiled!$(WHITE)🎉"
 
 lib:
-	@if [ ! -d "./lib/MLX42" ]; then \
-        $(CLONE) \
-    fi
-	@make -C lib/MLX42
+	@cmake lib/MLX42 -B lib/MLX42/build
+	@make -C lib/MLX42/build
+#@cmake -B build lib/MLX42
 
 clean:
 	@echo "$(RED)💥Cleaning .o💥$(WHITE)"
 	@sleep 1 > /dev/null
 	$(RM) $(OBJS)
-	@if [ -d "./lib/MLX42" ]; then \
-		make clean -C lib/MLX42; \
-	fi
 	@echo "🎉$(GREEN)Cleaning done!$(WHITE)🎉"
 
 fclean: clean
 	@echo "$(RED)💥Removing files...💥"
-	@sleep 1 > /dev/null
 	$(RM) $(NAME)
-	@echo "$(RED)💥Removing MLX Directory...💥"
-	@sleep 1 > /dev/null
-	@if [ -d "./lib/MLX42" ]; then \
-		rm -rf lib/MLX42; \
-	fi
 	@echo "🎉$(GREEN)Cleaning done!$(WHITE)🎉"
 
 re: fclean all
