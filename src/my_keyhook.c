@@ -6,14 +6,17 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:12:18 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 20:54:53 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/31 22:08:22 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
 
-void	my_keyhook(mlx_key_data_t keydata, t_fractol *frctl)
+void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
+	t_fractol			*frctl;
+
+	frctl = (t_fractol *)param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit(0);
 	else if (keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN)
@@ -24,6 +27,8 @@ void	my_keyhook(mlx_key_data_t keydata, t_fractol *frctl)
 		change_maxiter(keydata.key, frctl);
 	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
 		fract_init(frctl);
+	else if (keydata.key == MLX_KEY_Z && keydata.action == MLX_REPEAT)
+		mlx_cursor_hook(frctl->mlx, &my_mouse_pos, frctl);
 	else if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
 		print_help();
 	fract_calc(frctl);
@@ -33,13 +38,13 @@ void	move(keys_t key, t_fractol *frctl)
 {
 	if (key == MLX_KEY_UP)
 	{	
-		frctl->ymin -= 30 / frctl->zoom;
-		frctl->ymax -= 30 / frctl->zoom;
+		frctl->ymin += 30 / frctl->zoom;
+		frctl->ymax += 30 / frctl->zoom;
 	}
 	if (key == MLX_KEY_DOWN)
 	{	
-		frctl->ymin += 30 / frctl->zoom;
-		frctl->ymax += 30 / frctl->zoom;
+		frctl->ymin -= 30 / frctl->zoom;
+		frctl->ymax -= 30 / frctl->zoom;
 	}
 	if (key == MLX_KEY_LEFT)
 	{	
@@ -51,13 +56,16 @@ void	move(keys_t key, t_fractol *frctl)
 		frctl->xmin += 30 / frctl->zoom;
 		frctl->xmax += 30 / frctl->zoom;
 	}
-	// fract_calc(frctl);
+	fract_calc(frctl);
 }
 
-void	my_scrollhook(double xdelta, double ydelta, t_fractol *frctl)
+void	my_scrollhook(double xdelta, double ydelta, void *param)
 {
-	mlx_key_data_t		keydata;
+	t_fractol			*frctl;
 
+	frctl = (t_fractol *)param;
+	if (xdelta == 0)
+		printf("");
 	if (ydelta > 0)
 	{
 		frctl->ymin *= 0.9;
@@ -97,5 +105,17 @@ void	change_maxiter(keys_t key, t_fractol *frctl)
 		else if (frctl->iter_max > 1)
 			frctl->iter_max -= 1;
 	}
-	// fract_calc(frctl);
+	fract_calc(frctl);
+}
+
+void	my_mouse_pos(double xpos, double ypos, void *param)
+{
+	t_fractol	*frctl;
+
+	frctl = (t_fractol *)param;
+	frctl->c_r = xpos / WIDTH;
+	frctl->c_i = ypos / HEIGHT;
+	//printf("x : %f, y : %f\n", xpos, ypos);
+	// frctl->c_r = (cos(xpos) + 1) * 2 - 2;
+	// frctl->c_i = (cos(ypos) + 1) * 2 - 2;
 }

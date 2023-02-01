@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 20:28:21 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/31 22:08:36 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		mandelbrot_calc(t_fractol *frctl);
 void		*mandelbrot(void *param);
 void		mandelbrot_pthread(t_fractol *frctl);
 
-int			mouse_julia(int x, int y, t_fractol *frctl);
+// int			mouse_julia(int x, int y, t_fractol *frctl);
 void		julia_init(t_fractol *frctl);
 void		julia_calc(t_fractol *frctl);
 void		*julia(void *param);
@@ -89,10 +89,11 @@ int			get_rgba(int r, int g, int b, int a);
 /*
 **	Hooks & related functions
 */
-void		my_keyhook(mlx_key_data_t keydata, t_fractol *frctl);
-void		my_scrollhook(double xdelta, double ydelta, t_fractol *frctl);
+void		my_keyhook(mlx_key_data_t keydata, void *param);
+void		my_scrollhook(double xdelta, double ydelta, void *param);
 void		change_maxiter(keys_t key, t_fractol *frctl);
 void		move(keys_t key, t_fractol *frctl);
+void		my_mouse_pos(double xpos, double ypos, void *param);
 
 /*
 **	Print Functions

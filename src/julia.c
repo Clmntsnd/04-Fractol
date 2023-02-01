@@ -6,23 +6,12 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 20:00:48 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/31 22:33:46 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
 #include <string.h>
-
-int	mouse_julia(int x, int y, t_fractol *frctl)
-{
-	if (frctl->frctl_fct == 1 && frctl->julia_mouse == 1)
-	{
-		frctl->c_r = x * 2;
-		frctl->c_i = y * 2 - 800;
-		fract_calc(frctl);
-	}
-	return (0);
-}
 
 void	julia_init(t_fractol *frctl)
 {
@@ -32,8 +21,8 @@ void	julia_init(t_fractol *frctl)
 	frctl->xmax = 1.5;
 	frctl->ymin = -1.5;
 	frctl->ymax = 1.5;
-	frctl->c_r = -0.70176;
-	frctl->c_i = 0.3842;
+	frctl->c_r = 0;
+	frctl->c_i = 0.8;
 	frctl->julia_mouse = 1;
 }
 

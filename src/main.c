@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 19:22:44 by loulou           ###   ########.fr       */
+/*   Updated: 2023/01/31 21:38:07 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	fract_calc(t_fractol *frctl)
 {
 	if (frctl->iter_max < 0)
 		frctl->iter_max = 0;
-	if (frctl->frctl_fct == 0)
+	if (frctl->frctl_fct == 1)
 		mandelbrot_pthread(frctl);
-	else if (frctl->frctl_fct == 1)
+	else if (frctl->frctl_fct == 2)
 		julia_pthread(frctl);
 }
 
 void	fract_init(t_fractol *frctl)
 {
-	if (frctl->frctl_fct == 0)
+	if (frctl->frctl_fct == 1)
 		mandelbrot_init(frctl);
-	else if (frctl->frctl_fct == 1)
+	else if (frctl->frctl_fct == 2)
 		julia_init(frctl);
 	fract_calc(frctl);
 }
@@ -49,10 +49,10 @@ void	mlx_setup(t_fractol *frctl)
 
 int	fract_sets(char **argv, t_fractol *frctl)
 {
-	if (argv[1][0] == '1' && !argv[1][1])
-		frctl->frctl_fct = 0;
-	else if (argv[1][0] == '2' && !argv[1][1])
+	if (argv[1][0] == '1')
 		frctl->frctl_fct = 1;
+	else if (argv[1][0] == '2' && argv[1][1] == '\0')
+		frctl->frctl_fct = 2;
 	else
 		print_usage();
 	return (1);
@@ -61,22 +61,17 @@ int	fract_sets(char **argv, t_fractol *frctl)
 int	main(int argc, char *argv[])
 {
 	t_fractol	*frctl;
-	if (argc == 1)
-		print_usage();	
-	if (argc == 2)
+
+	if (argc == 1 || argv[1][1] != '\0')
+		print_usage();
+	if (argc == 2 && argv[1][1] == '\0')
 	{
-		//maybe use get_data from previous Versions ?
 		frctl = (t_fractol *)malloc(sizeof(t_fractol));
-		if(!frctl)
-			return (-1);
+		if (!frctl)
+			exit(1);
 		mlx_setup(frctl);
-		//choose which sets to use	
 		if ((fract_sets(argv, frctl)) == 0)
-		{
-			puts("fract_sets failed");
-			exit(50);
-			// return (-1);
-		}
+			exit(1);
 		fract_init(frctl);
 		mlx_key_hook(frctl->mlx, &my_keyhook, frctl);
 		mlx_scroll_hook(frctl->mlx, &my_scrollhook, frctl);

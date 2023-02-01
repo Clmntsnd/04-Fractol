@@ -3,7 +3,7 @@ NAME = fractol
 
 # -- Compiler -- #
 CC = gcc -g
-#CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 # -- OS CHECK -- #
 OS = $(shell uname)
