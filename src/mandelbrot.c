@@ -6,13 +6,30 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:38:23 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 15:51:11 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
-//ATTENTION replace memcpy by ft_memcpy
-#include <string.h>
+
+static void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	char	*c_dst;
+	char	*c_src;
+	size_t	i;
+
+	if (!src || !dst)
+		return (dst);
+	c_dst = (char *) dst;
+	c_src = (char *) src;
+	i = 0;
+	while (i < n)
+	{
+		c_dst[i] = c_src[i];
+		i++;
+	}
+	return (c_dst);
+}
 
 void	mandelbrot_init(t_fractol *frctl)
 {
@@ -80,8 +97,7 @@ void	mandelbrot_pthread(t_fractol *frctl)
 	i = 0;
 	while (i < THREAD_NUMBER)
 	{
-		// ATTENTION use my version of memcpy
-		memcpy((void *)&param[i], (void *)frctl, sizeof(t_fractol));
+		ft_memcpy((void *)&param[i], (void *)frctl, sizeof(t_fractol));
 		param[i].y = THREAD_WIDTH * i;
 		param[i].y_max = THREAD_WIDTH * (i + 1);
 		pthread_create(&t[i], NULL, mandelbrot, &param[i]);

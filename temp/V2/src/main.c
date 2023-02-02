@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/30 10:06:06 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 11:11:35 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void get_arg(int argc, char **argv)
 		exec(data, "Mandelbrot Set");
 	}
 	else
-		print_usage();
+		print_usage()
 }
 
 int	main(int argc, char *argv[])

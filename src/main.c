@@ -6,12 +6,15 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:47:36 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 16:08:25 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
 
+/*
+** Calculus functions 
+*/
 void	fract_calc(t_fractol *frctl)
 {
 	if (frctl->iter_max < 0)
@@ -21,74 +24,86 @@ void	fract_calc(t_fractol *frctl)
 	else if (frctl->frctl_fct == 2)
 		julia_pthread(frctl);
 	else if (frctl->frctl_fct == 3)
-		buddhabrot_pthread(frctl);
-	else if (frctl->frctl_fct == 4)
-		julia_multi_pthread(frctl);
+		burningship_pthread(frctl);
 }
 
-void	fract_init(t_fractol *frctl)
+/*
+** Initiate default values req'd for each sets
+*/
+void	fract_init(t_fractol *frctl, char **argv)
 {
 	if (frctl->frctl_fct == 1)
 		mandelbrot_init(frctl);
 	else if (frctl->frctl_fct == 2)
-		julia_init(frctl);
+		julia_init(frctl, argv);
 	else if (frctl->frctl_fct == 3)
-		buddhabrot_init(frctl);
-	else if (frctl->frctl_fct == 4)
-		julia_multi_init(frctl);
+		burningship_init(frctl);
 	fract_calc(frctl);
 }
 
-static	void	ft_error(void)
-{
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
-}
-
+/*
+** Initiate mlx and img, then send a message if something didn't work
+*/
 void	mlx_setup(t_fractol *frctl)
 {
 	frctl->mlx = mlx_init(WIDTH, HEIGHT, "Fractol", false);
-	if (!frctl->mlx)
-		ft_error();
 	frctl->img = mlx_new_image(frctl->mlx, WIDTH, HEIGHT);
-	if (!frctl->img || (mlx_image_to_window(frctl->mlx, frctl->img, 0, 0) < 0))
-		ft_error();
+	if (!frctl->mlx || !frctl->img
+		|| (mlx_image_to_window(frctl->mlx, frctl->img, 0, 0) < 0))
+	{	
+		printf("Something went wrong during mlx or img initialization");
+		exit(1);
+	}
 }
 
-int	fract_sets(char **argv, t_fractol *frctl)
+/*
+** Attributes a number per sets per received args
+*/
+int	fract_sets(int argc, char **argv, t_fractol *frctl)
 {
-	if (argv[1][0] == '1')
+	if (argv[1][0] == '2')
+	{
+		if (argc < 4)
+		{
+			arg_usage(0);
+			return (0);
+		}
+		else
+			frctl->frctl_fct = 2;
+	}
+	else if (argv[1][0] == '1')
 		frctl->frctl_fct = 1;
-	else if (argv[1][0] == '2')
-		frctl->frctl_fct = 2;
 	else if (argv[1][0] == '3')
 		frctl->frctl_fct = 3;
-	else if (argv[1][0] == '4')
-		frctl->frctl_fct = 4;
 	else
 		print_usage();
 	return (1);
 }
 
+/*
+** Main function
+*/
 int	main(int argc, char *argv[])
 {
 	t_fractol	*frctl;
 
 	if (argc == 1 || argv[1][1] != '\0')
 		print_usage();
-	if (argc == 2 && argv[1][1] == '\0')
+	if (argc >= 2 && argv[1][1] == '\0')
 	{
 		frctl = (t_fractol *)malloc(sizeof(t_fractol));
 		if (!frctl)
-			exit(1);
-		mlx_setup(frctl);
-		if ((fract_sets(argv, frctl)) == 0)
-			exit(1);
-		fract_init(frctl);
-		mlx_key_hook(frctl->mlx, &my_keyhook, frctl);
-		mlx_scroll_hook(frctl->mlx, &my_scrollhook, frctl);
-		mlx_loop(frctl->mlx);
-		mlx_terminate(frctl->mlx);
-		return (EXIT_SUCCESS);
+			return (1);
+		if (fract_sets(argc, argv, frctl) != 0)
+		{
+			mlx_setup(frctl);
+			fract_init(frctl, argv);
+			mlx_key_hook(frctl->mlx, &my_keyhook, frctl);
+			mlx_scroll_hook(frctl->mlx, &my_scrollhook, frctl);
+			mlx_loop(frctl->mlx);
+			mlx_terminate(frctl->mlx);
+			return (EXIT_SUCCESS);
+		}
 	}
+	return (0);
 }

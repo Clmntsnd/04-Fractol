@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:56:54 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 16:08:50 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,15 @@ typedef struct s_fractol
 	double		new_r;
 	double		new_i;
 	double		tmp;
-	double			n;
+	double		n;
 }	t_fractol;
 
 /*
 **	Main Functions
 */
 void		mlx_setup(t_fractol *frctl);
-int			fract_sets(char **argv, t_fractol *frctl);
-void		fract_init(t_fractol *frctl);
-int			fract_sets(char **argv, t_fractol *frctl);
+int			fract_sets(int argc, char **argv, t_fractol *frctl);
+void		fract_init(t_fractol *frctl, char **argv);
 
 /*
 **	Calcul Functions
@@ -73,20 +72,15 @@ void		*mandelbrot(void *param);
 void		mandelbrot_pthread(t_fractol *frctl);
 
 // int			mouse_julia(int x, int y, t_fractol *frctl);
-void		julia_init(t_fractol *frctl);
+void		julia_init(t_fractol *frctl, char **argv);
 void		julia_calc(t_fractol *frctl);
 void		*julia(void *param);
 void		julia_pthread(t_fractol *frctl);
 
-void		buddhabrot_init(t_fractol *frctl);
-void		buddhabrot_calc(t_fractol *frctl);
-void 		*buddhabrot(void *param);
-void		buddhabrot_pthread(t_fractol *frctl);
-
-void		julia_multi_init(t_fractol *frctl);
-void		julia_multi_calc(t_fractol *frctl);
-void		*julia_multi(void *param);
-void		julia_multi_pthread(t_fractol *frctl);
+void		burningship_init(t_fractol *frctl);
+void		burningship_calc(t_fractol *frctl);
+void		*burningship(void *param);
+void		burningship_pthread(t_fractol *frctl);
 
 /*
 **	Color Functions
@@ -104,9 +98,11 @@ void		move(keys_t key, t_fractol *frctl);
 void		my_mouse_pos(double xpos, double ypos, void *param);
 
 /*
-**	Print Functions
+** Utils Functions
 */
 void		print_usage(void);
 void		print_help(void);
+void		arg_usage(int flag);
+double		my_atof(const char *str);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:12:18 by csenand           #+#    #+#             */
-/*   Updated: 2023/01/31 22:08:22 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/02 15:52:26 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		move(keydata.key, frctl);
 	else if (keydata.key == MLX_KEY_I || keydata.key == MLX_KEY_O)
 		change_maxiter(keydata.key, frctl);
-	else if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
-		fract_init(frctl);
 	else if (keydata.key == MLX_KEY_Z && keydata.action == MLX_REPEAT)
 		mlx_cursor_hook(frctl->mlx, &my_mouse_pos, frctl);
 	else if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
@@ -65,7 +63,7 @@ void	my_scrollhook(double xdelta, double ydelta, void *param)
 
 	frctl = (t_fractol *)param;
 	if (xdelta == 0)
-		printf("");
+		;
 	if (ydelta > 0)
 	{
 		frctl->ymin *= 0.9;
@@ -115,7 +113,4 @@ void	my_mouse_pos(double xpos, double ypos, void *param)
 	frctl = (t_fractol *)param;
 	frctl->c_r = xpos / WIDTH;
 	frctl->c_i = ypos / HEIGHT;
-	//printf("x : %f, y : %f\n", xpos, ypos);
-	// frctl->c_r = (cos(xpos) + 1) * 2 - 2;
-	// frctl->c_i = (cos(ypos) + 1) * 2 - 2;
 }

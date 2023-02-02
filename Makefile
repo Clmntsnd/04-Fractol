@@ -29,7 +29,9 @@ RUN = ./fractol 1
 OBJS = ${SRC:.c=.o}
 
 # -- Sources -- #
-SRC = ./src/julia_multi.c ./src/julia.c ./src/colors.c ./src/main.c ./src/buddhabrot.c ./src/mandelbrot.c ./src/my_keyhook.c ./src/print_usage.c
+SRC =	./src/julia.c ./src/burningship.c ./src/colors.c ./src/main.c \
+		./src/utils.c ./src/mandelbrot.c ./src/my_keyhook.c 
+		
 
 # -- Colors -- #
 BLACK = \033[0;30m
@@ -59,11 +61,9 @@ $(NAME): ${OBJS} ./lib/fractol.h
 lib:
 	@cmake lib/MLX42 -B lib/MLX42/build
 	@make -C lib/MLX42/build
-#@cmake -B build lib/MLX42
 
 clean:
 	@echo "$(RED)💥Cleaning .o💥$(WHITE)"
-	@sleep 1 > /dev/null
 	$(RM) $(OBJS)
 	@echo "🎉$(GREEN)Cleaning done!$(WHITE)🎉"
 

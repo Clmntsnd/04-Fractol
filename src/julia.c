@@ -6,15 +6,32 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/01 17:37:12 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 15:54:05 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/fractol.h"
-//ATTENTION replace memcpy by ft_memcpy
-#include <string.h>
 
-void	julia_init(t_fractol *frctl)
+static void	*ft_memcpy(void *dst, const void *src, size_t n)
+{
+	char	*c_dst;
+	char	*c_src;
+	size_t	i;
+
+	if (!src || !dst)
+		return (dst);
+	c_dst = (char *) dst;
+	c_src = (char *) src;
+	i = 0;
+	while (i < n)
+	{
+		c_dst[i] = c_src[i];
+		i++;
+	}
+	return (c_dst);
+}
+
+void	julia_init(t_fractol *frctl, char **argv)
 {
 	frctl->iter_max = 28;
 	frctl->zoom = 200;
@@ -22,14 +39,14 @@ void	julia_init(t_fractol *frctl)
 	frctl->xmax = 1.5;
 	frctl->ymin = -1.5;
 	frctl->ymax = 1.5;
-	frctl->c_r = -0.8;
-	frctl->c_i = 0.156;
+	frctl->c_r = my_atof(argv[2]);
+	frctl->c_i = my_atof(argv[3]);
 }
 
 void	julia_calc(t_fractol *frctl)
 {
 	frctl->iter = 0;
-	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4 
+	while (pow(frctl->z_r, 2) + pow(frctl->z_i, 2) < 4
 		&& frctl->iter < frctl->iter_max)
 	{
 		frctl->new_r = pow(frctl->z_r, 2) - pow(frctl->z_i, 2) + frctl->c_r;
@@ -43,7 +60,7 @@ void	julia_calc(t_fractol *frctl)
 	else
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter));
 }
-  
+
 void	*julia(void *param)
 {
 	t_fractol	*frctl;
@@ -80,7 +97,7 @@ void	julia_pthread(t_fractol *frctl)
 	i = 0;
 	while (i < THREAD_NUMBER)
 	{
-		memcpy((void *)&param[i], (void *)frctl,
+		ft_memcpy((void *)&param[i], (void *)frctl,
 			sizeof(t_fractol));
 		param[i].y = THREAD_WIDTH * i;
 		param[i].y_max = THREAD_WIDTH * (i + 1);

@@ -6,7 +6,7 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 08:13:17 by loulou            #+#    #+#             */
-/*   Updated: 2023/01/30 14:19:22 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 11:47:47 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ int print_usage (void)
 void arg_usage (int flag)
 {
 	if (flag == 0)
-		printf("Missing two others args");
+		printf("Julia's set needs ");
 }
