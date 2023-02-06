@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 16:17:22 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:17:59 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	burningship_init(t_fractol *frctl)
 	frctl->zoom = 300;
 	frctl->xmin = -2;
 	frctl->xmax = 1.2;
-	frctl->ymin = -1.2;
-	frctl->ymax = 1.2;
+	frctl->ymin = -2;
+	frctl->ymax = 1.22;
 }
 
 void	burningship_calc(t_fractol *frctl)
@@ -58,7 +58,8 @@ void	burningship_calc(t_fractol *frctl)
 	if (frctl->iter == frctl->iter_max)
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, 0xFF);
 	else
-		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter));
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y,
+			set_color(frctl->iter, frctl));
 }
 
 void	*burningship(void *param)

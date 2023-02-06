@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 15:54:05 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:17:50 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	julia_calc(t_fractol *frctl)
 	if (frctl->iter == frctl->iter_max)
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, 0xFF);
 	else
-		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter));
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y,
+			set_color(frctl->iter, frctl));
 }
 
 void	*julia(void *param)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_keyhook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:12:18 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 15:52:26 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 21:03:08 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		move(keydata.key, frctl);
 	else if (keydata.key == MLX_KEY_I || keydata.key == MLX_KEY_O)
 		change_maxiter(keydata.key, frctl);
+	// else if (keydata.key == MLX_KEY_R)
+	// 	reset();
 	else if (keydata.key == MLX_KEY_Z && keydata.action == MLX_REPEAT)
 		mlx_cursor_hook(frctl->mlx, &my_mouse_pos, frctl);
 	else if (keydata.key == MLX_KEY_H && keydata.action == MLX_PRESS)
@@ -36,13 +38,19 @@ void	move(keys_t key, t_fractol *frctl)
 {
 	if (key == MLX_KEY_UP)
 	{	
+		// frctl->ymin += .1;
+		// frctl->ymax += .1;
 		frctl->ymin += 30 / frctl->zoom;
 		frctl->ymax += 30 / frctl->zoom;
+		frctl->zoom *= 1.1;
 	}
 	if (key == MLX_KEY_DOWN)
 	{	
+		// frctl->ymin -= .1;
+		// frctl->ymax -= .1;
 		frctl->ymin -= 30 / frctl->zoom;
 		frctl->ymax -= 30 / frctl->zoom;
+		frctl->zoom /= 1.1;
 	}
 	if (key == MLX_KEY_LEFT)
 	{	
@@ -54,6 +62,9 @@ void	move(keys_t key, t_fractol *frctl)
 		frctl->xmin += 30 / frctl->zoom;
 		frctl->xmax += 30 / frctl->zoom;
 	}
+	frctl->ymin /= frctl->zoom / 300.0;
+    frctl->ymax /= frctl->zoom / 300.0;
+    frctl->zoom = 300;
 	fract_calc(frctl);
 }
 

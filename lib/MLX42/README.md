@@ -32,8 +32,8 @@ This allows you to work on your project no matter which machine it is on.
 
 ## Documented 📚
 
-MLX42 is cares about good documentation, every function, usage and even some internal workings
-are documented! No more guessing and searching how something functions or is supposed to work.
+MLX42 cares about good documentation, every function, usage and even some internal workings are documented!
+No more guessing and searching how something functions or is supposed to work.
 
 ## Performance 🚀
 
@@ -180,8 +180,9 @@ Of course its up to you to make sure that the code you write is portable. Things
 
 ```bash 
 ➜  ~ git clone https://github.com/codam-coding-college/MLX42.git
+➜  ~ cd MLX42
 ➜  ~ cmake -B build
-➜  ~ cmake --build build
+➜  ~ cmake --build build -j4
 ```
 
 The output library file is called `libmlx42.a`.

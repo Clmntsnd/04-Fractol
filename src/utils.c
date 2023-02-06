@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 16:15:48 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:03:06 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,38 +58,47 @@ double	my_atof(const char *str)
 
 void	print_usage(void)
 {
-	printf(RED "\n❌ Uh oh" WHT ", something went wrong! See Below.\n\n" WHT);
-	printf(GRN "✅ Usage :" WHT " ./fractol " RED "[fractal_set_nb]\n\n");
-	printf(YEL "📝 Available Sets\n");
-	printf("  --> 1️⃣  Mandelbrot\n");
-	printf("  --> 2️⃣  Julia\n");
-	printf("  --> 3️⃣  Burningship\n\n");
-	printf("    |-> For Julia, please provide 2 args :\n");
-	printf("    |-> ./fractol 2 [A] [B]\n\n");
-	printf("    |-> Few examples that you could try\n");
-	printf("    |-> ./fractol 2 0.285 0.01\n");
-	printf("    |-> ./fractol 2 0.285 0\n");
-	printf("    |-> ./fractol 2 -0.70176 0.3842\n");
-	printf("    |-> ./fractol 2 0 -0.8\n\n");
-	printf(GRN "Please type the accurate command to start the program\n");
+	printf(RED "\n❌ Ooops" WHT ", something went wrong!\n\n" WHT
+		GRN "✅ Usage :" WHT " ./fractol " RED "[fractal_set_nb]\n\n"
+		YEL "📝 Available Sets\n\n"
+		"   --> 1️⃣  Mandelbrot\n"
+		"   --> 2️⃣  Julia\n"
+		"   --> 3️⃣  Burningship\n\n"
+		YEL"    |-> For Julia, please provide 2 arguments :\n" WHT
+		"    |-> ./fractol 2 [A] [B]\n\n"
+		YEL "    |-> Few examples that you could try\n" WHT
+		"      |-> ./fractol 2 0.285 0.01\n"
+		"      |-> ./fractol 2 0.285 0\n"
+		"      |-> ./fractol 2 -0.70176 0.3842\n"
+		"      |-> ./fractol 2 0 -0.8\n\n"
+		YEL "🛟  When the program will execute, you can press 'h',\n"
+		"   it'll display a Key Hooks menu in the terminal\n"WHT);
 }
 
 void	print_help(void)
 {
-	printf(YEL "\n Key Hooks (all sets)\n\n");
-	printf(WHT "  esc		| Quit program\n");
-	printf("  ⬆		| Move up\n");
-	printf("  ⬇		| Move down\n");
-	printf("  <->		| Move left|right\n");
-	printf("  r		| reset to default parameters\n");
-	printf("  h		| Show help\n");
-	printf("  mouse wheel	| Zoom in and out\n");
-	printf(YEL "\n Key Hooks (Julia set)\n\n");
-	printf(WHT"  z + mouse mvt	| change values to show different sets\n");
+	printf(YEL "\n Key Hooks (all sets)\n\n"
+		WHT "  esc		| Quit program\n"
+		"  ⬆		| Move up\n"
+		"  ⬇		| Move down\n"
+		"  <->		| Move left|right\n"
+		"  r		| reset to default parameters\n"
+		"  h		| Show help\n"
+		"  mouse wheel	| Zoom in and out\n"
+		YEL "\n Key Hooks (Julia set)\n\n"
+		WHT"  z + mouse mvt	| change values to show different sets\n");
 }
 
 void	arg_usage(int flag)
 {
 	if (flag == 0)
-		printf("Missing two others args");
+	{
+		printf(RED "\n❌ Wrong Usage\n\n"
+			GRN "✅ Usage :" WHT " ./fractol 2 " RED "[A] [B]\n\n"
+			YEL "    |-> Few examples that you could try\n" WHT
+			"      |-> ./fractol 2 0.285 0.01\n"
+			"      |-> ./fractol 2 0.285 0\n"
+			"      |-> ./fractol 2 -0.70176 0.3842\n"
+			"      |-> ./fractol 2 0 -0.8\n\n");
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 15:51:11 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 21:05:33 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	mandelbrot_calc(t_fractol *frctl)
 	if (frctl->iter == frctl->iter_max)
 		mlx_put_pixel(frctl->img, frctl->x, frctl->y, 0xFF);
 	else
-		mlx_put_pixel(frctl->img, frctl->x, frctl->y, set_color(frctl->iter));
+		mlx_put_pixel(frctl->img, frctl->x, frctl->y,
+			set_color(frctl->iter, frctl));
 }
 
 void	*mandelbrot(void *param)
@@ -90,17 +91,17 @@ void	*mandelbrot(void *param)
 
 void	mandelbrot_pthread(t_fractol *frctl)
 {
-	t_fractol	param[THREAD_NUMBER];
+	t_fractol	t_param[THREAD_NUMBER];
 	pthread_t	t[THREAD_NUMBER];
 	int			i;
 
 	i = 0;
 	while (i < THREAD_NUMBER)
 	{
-		ft_memcpy((void *)&param[i], (void *)frctl, sizeof(t_fractol));
-		param[i].y = THREAD_WIDTH * i;
-		param[i].y_max = THREAD_WIDTH * (i + 1);
-		pthread_create(&t[i], NULL, mandelbrot, &param[i]);
+		ft_memcpy((void *)&t_param[i], (void *)frctl, sizeof(t_fractol));
+		t_param[i].y = THREAD_WIDTH * i;
+		t_param[i].y_max = THREAD_WIDTH * (i + 1);
+		pthread_create(&t[i], NULL, mandelbrot, &t_param[i]);
 		i++;
 	}
 	while (i--)

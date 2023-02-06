@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 16:08:50 by csenand          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:14:16 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define BLU "\x1B[34m"
 # define WHT "\x1B[37m"
 # define YEL "\x1B[33m"
+# define BLINK "\x1B[5m"
 # define WIDTH 800
 # define HEIGHT 720
 # define THREAD_WIDTH 5
@@ -85,7 +86,8 @@ void		burningship_pthread(t_fractol *frctl);
 /*
 **	Color Functions
 */
-uint32_t	set_color(int iter);
+// uint32_t	set_color(int iter);
+uint32_t	set_color(int iter, t_fractol *frctl);
 int			get_rgba(int r, int g, int b, int a);
 
 /*
