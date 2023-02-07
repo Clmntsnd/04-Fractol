@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/mlx42.dir/mlx_frag_shader.c.o.d"
   "CMakeFiles/mlx42.dir/mlx_vert_shader.c.o"
   "CMakeFiles/mlx42.dir/mlx_vert_shader.c.o.d"
+  "CMakeFiles/mlx42.dir/src/font/mlx_font.c.o"
+  "CMakeFiles/mlx42.dir/src/font/mlx_font.c.o.d"
   "CMakeFiles/mlx42.dir/src/mlx_cursor.c.o"
   "CMakeFiles/mlx42.dir/src/mlx_cursor.c.o.d"
   "CMakeFiles/mlx42.dir/src/mlx_exit.c.o"

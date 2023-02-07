@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/06 21:37:20 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:32:40 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	mandelbrot_init(t_fractol *frctl)
 	frctl->xmax = 1.2;
 	frctl->ymin = -1.2;
 	frctl->ymax = 1.2;
+	frctl->frctl_color = 1;
 }
 
 void	mandelbrot_calc(t_fractol *frctl)

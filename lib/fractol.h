@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:38:13 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 20:14:16 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/07 13:40:31 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ typedef struct s_fractol
 	double		z_i;
 	double		new_r;
 	double		new_i;
-	double		tmp;
-	double		n;
+	int			frctl_color;
 }	t_fractol;
 
 /*
@@ -97,6 +96,7 @@ void		my_keyhook(mlx_key_data_t keydata, void *param);
 void		my_scrollhook(double xdelta, double ydelta, void *param);
 void		change_maxiter(keys_t key, t_fractol *frctl);
 void		move(keys_t key, t_fractol *frctl);
+void		color_shift(keys_t key, t_fractol *frctl);
 void		my_mouse_pos(double xpos, double ypos, void *param);
 
 /*
@@ -106,5 +106,7 @@ void		print_usage(void);
 void		print_help(void);
 void		arg_usage(int flag);
 double		my_atof(const char *str);
+int			ft_isdigit(int c);
+int			ft_atoi(const char *str);
 
 #endif

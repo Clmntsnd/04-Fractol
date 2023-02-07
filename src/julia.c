@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/06 22:40:46 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:32:48 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	julia_init(t_fractol *frctl, char **argv)
 	frctl->ymax = 1.5;
 	frctl->c_r = my_atof(argv[2]);
 	frctl->c_i = my_atof(argv[3]);
+	frctl->frctl_color = 1;
 }
 
 void	julia_calc(t_fractol *frctl)

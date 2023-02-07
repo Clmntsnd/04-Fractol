@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /opt/homebrew/Cellar/cmake/3.25.1/bin/cmake
+CMAKE_COMMAND = /Users/csenand/.brew/Cellar/cmake/3.25.2/bin/cmake
 
 # The command to remove a file.
-RM = /opt/homebrew/Cellar/cmake/3.25.1/bin/cmake -E rm -f
+RM = /Users/csenand/.brew/Cellar/cmake/3.25.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/loulou/Documents/42/04-Fractol/lib/MLX42
+CMAKE_SOURCE_DIR = /Users/csenand/Documents/04-Fractol/lib/MLX42
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/loulou/Documents/42/04-Fractol/lib/MLX42/build
+CMAKE_BINARY_DIR = /Users/csenand/Documents/04-Fractol/lib/MLX42/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /Users/loulou/Documents/42/04-Fractol/lib/MLX42/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/opt/homebrew/Cellar/cmake/3.25.1/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Users/csenand/.brew/Cellar/cmake/3.25.2/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/opt/homebrew/Cellar/cmake/3.25.1/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Users/csenand/.brew/Cellar/cmake/3.25.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/loulou/Documents/42/04-Fractol/lib/MLX42/build/CMakeFiles /Users/loulou/Documents/42/04-Fractol/lib/MLX42/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/csenand/Documents/04-Fractol/lib/MLX42/build/CMakeFiles /Users/csenand/Documents/04-Fractol/lib/MLX42/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/loulou/Documents/42/04-Fractol/lib/MLX42/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/csenand/Documents/04-Fractol/lib/MLX42/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -224,6 +224,30 @@ mlx_vert_shader.s: mlx_vert_shader.c.s
 mlx_vert_shader.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mlx42.dir/build.make CMakeFiles/mlx42.dir/mlx_vert_shader.c.s
 .PHONY : mlx_vert_shader.c.s
+
+src/font/mlx_font.o: src/font/mlx_font.c.o
+.PHONY : src/font/mlx_font.o
+
+# target to build an object file
+src/font/mlx_font.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mlx42.dir/build.make CMakeFiles/mlx42.dir/src/font/mlx_font.c.o
+.PHONY : src/font/mlx_font.c.o
+
+src/font/mlx_font.i: src/font/mlx_font.c.i
+.PHONY : src/font/mlx_font.i
+
+# target to preprocess a source file
+src/font/mlx_font.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mlx42.dir/build.make CMakeFiles/mlx42.dir/src/font/mlx_font.c.i
+.PHONY : src/font/mlx_font.c.i
+
+src/font/mlx_font.s: src/font/mlx_font.c.s
+.PHONY : src/font/mlx_font.s
+
+# target to generate assembly for a file
+src/font/mlx_font.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mlx42.dir/build.make CMakeFiles/mlx42.dir/src/font/mlx_font.c.s
+.PHONY : src/font/mlx_font.c.s
 
 src/mlx_cursor.o: src/mlx_cursor.c.o
 .PHONY : src/mlx_cursor.o
@@ -654,6 +678,9 @@ help:
 	@echo "... mlx_vert_shader.o"
 	@echo "... mlx_vert_shader.i"
 	@echo "... mlx_vert_shader.s"
+	@echo "... src/font/mlx_font.o"
+	@echo "... src/font/mlx_font.i"
+	@echo "... src/font/mlx_font.s"
 	@echo "... src/mlx_cursor.o"
 	@echo "... src/mlx_cursor.i"
 	@echo "... src/mlx_cursor.s"

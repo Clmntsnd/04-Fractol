@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 19:03:06 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/07 14:02:27 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ void	print_usage(void)
 		"      |-> ./fractol 2 0.285 0\n"
 		"      |-> ./fractol 2 -0.70176 0.3842\n"
 		"      |-> ./fractol 2 0 -0.8\n\n"
-		YEL "🛟  When the program will execute, you can press 'h',\n"
+		YEL "🔔 When executing the program, you can press 'h',\n"
 		"   it'll display a Key Hooks menu in the terminal\n"WHT);
+	exit(0);
 }
 
 void	print_help(void)
@@ -82,11 +83,11 @@ void	print_help(void)
 		"  ⬆		| Move up\n"
 		"  ⬇		| Move down\n"
 		"  <->		| Move left|right\n"
-		"  r		| reset to default parameters\n"
+		"  r		| change colors to "RED"red"WHT
+		"  g		| change colors to "GRN"green"WHT
+		"  b		| change colors to "BLU"blue"WHT
 		"  h		| Show help\n"
-		"  mouse wheel	| Zoom in and out\n"
-		YEL "\n Key Hooks (Julia set)\n\n"
-		WHT"  z + mouse mvt	| change values to show different sets\n");
+		"  mouse wheel	| Zoom in and out\n");
 }
 
 void	arg_usage(int flag)

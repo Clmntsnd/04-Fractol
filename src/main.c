@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/06 20:48:29 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/07 14:15:28 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	fract_sets(int argc, char **argv, t_fractol *frctl)
 		if (argc < 4)
 		{
 			arg_usage(0);
-			return (0);
+			exit(0);
 		}
 		else
 			frctl->frctl_fct = 2;
@@ -89,7 +89,8 @@ int	main(int argc, char *argv[])
 
 	if (argc == 1 || argv[1][1] != '\0')
 		print_usage();
-	if (argc >= 2 && argv[1][1] == '\0')
+	if (argc >= 2 && ft_isdigit(ft_atoi(&argv[1][0])) == 0
+		&& argv[1][1] == '\0')
 	{
 		frctl = (t_fractol *)malloc(sizeof(t_fractol));
 		if (!frctl)

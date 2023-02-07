@@ -1,9 +1,21 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: csenand <csenand@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/07 11:52:46 by csenand           #+#    #+#              #
+#    Updated: 2023/02/07 12:05:08 by csenand          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # -- Executable's name -- #
 NAME = fractol
 
 # -- Compiler -- #
-CC = gcc -g
-CFLAGS = -Wall -Werror -Wextra
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -g
 
 # -- OS CHECK -- #
 OS = $(shell uname)
@@ -22,17 +34,13 @@ RM = rm -f
 # -- MLX42 LIB -- #
 MLX = ./lib/MLX42/build/libmlx42.a
 
-# -- RUN -- #
-RUN = ./fractol 1
-
 # -- OBJS -- #
 OBJS = ${SRC:.c=.o}
 
 # -- Sources -- #
 SRC =	./src/julia.c ./src/burningship.c ./src/colors.c ./src/main.c \
-		./src/utils.c ./src/mandelbrot.c ./src/my_keyhook.c 
+		./src/utils.c ./src/mandelbrot.c ./src/my_keyhook.c ./src/tools.c
 		
-
 # -- Colors -- #
 BLACK = \033[0;30m
 RED = \033[0;31m
@@ -52,9 +60,9 @@ else ifeq ($(OS), Darwin)
 	FLAGS = $(MAC)
 endif
 
-all: lib $(NAME)
+all: lib $(NAME) ./lib/fractol.h
 
-$(NAME): ${OBJS} ./lib/fractol.h
+$(NAME): ${OBJS} 
 	${CC} $(CFLAGS) $(OBJS) $(MLX) $(FLAGS) -o ${NAME}
 	@echo "🎉$(GREEN)Everything compiled!$(WHITE)🎉"
 

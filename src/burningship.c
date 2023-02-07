@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 20:17:59 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/07 11:33:00 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	burningship_init(t_fractol *frctl)
 	frctl->xmax = 1.2;
 	frctl->ymin = -2;
 	frctl->ymax = 1.22;
+	frctl->frctl_color = 1;
 }
 
 void	burningship_calc(t_fractol *frctl)
