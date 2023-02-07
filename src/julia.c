@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 11:26:14 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 20:17:50 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/06 22:40:46 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	*ft_memcpy(void *dst, const void *src, size_t n)
 void	julia_init(t_fractol *frctl, char **argv)
 {
 	frctl->iter_max = 28;
-	frctl->zoom = 200;
+	frctl->zoom = 300;
 	frctl->xmin = -1.5;
 	frctl->xmax = 1.5;
 	frctl->ymin = -1.5;

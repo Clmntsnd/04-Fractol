@@ -6,7 +6,7 @@
 /*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/02 21:05:33 by loulou           ###   ########.fr       */
+/*   Updated: 2023/02/06 21:37:20 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 void	mandelbrot_init(t_fractol *frctl)
 {
-	frctl->iter_max = 50;
+	frctl->iter_max = 25;
 	frctl->zoom = 300;
 	frctl->xmin = -2;
 	frctl->xmax = 1.2;
