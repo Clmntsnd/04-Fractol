@@ -6,11 +6,11 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:42:59 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/07 14:15:28 by csenand          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:10:29 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/fractol.h"
+#include "../include/fractol.h"
 
 /*
 ** Fractal's math functions 

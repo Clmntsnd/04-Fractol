@@ -6,11 +6,11 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 13:12:18 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/07 14:31:40 by csenand          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:10:41 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/fractol.h"
+#include "../include/fractol.h"
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {

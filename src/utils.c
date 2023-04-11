@@ -6,11 +6,11 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/07 14:02:27 by csenand          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:10:53 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/fractol.h"
+#include "../include/fractol.h"
 
 static int	check_sign(const char *str)
 {

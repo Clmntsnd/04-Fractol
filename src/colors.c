@@ -6,12 +6,12 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 11:54:49 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/07 11:50:12 by csenand          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:10:21 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
-#include "../lib/fractol.h"
+// #include "../lib/MLX42/include/MLX42/MLX42.h"
+#include "../include/fractol.h"
 
 int	get_rgba(int r, int g, int b, int a)
 {
@@ -46,3 +46,4 @@ uint32_t	set_color(int iter, t_fractol	*frctl)
 	}
 	return (get_rgba(r, g, b, 255));
 }
+	

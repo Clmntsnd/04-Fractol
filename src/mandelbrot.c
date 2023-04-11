@@ -6,11 +6,11 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 10:59:57 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/07 11:32:40 by csenand          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:10:35 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/fractol.h"
+#include "../include/fractol.h"
 
 static void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

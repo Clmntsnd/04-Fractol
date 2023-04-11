@@ -6,11 +6,11 @@
 /*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 12:03:01 by csenand           #+#    #+#             */
-/*   Updated: 2023/02/07 13:43:56 by csenand          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:10:48 by csenand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/fractol.h"
+#include "../include/fractol.h"
 
 int	ft_isdigit(int c)
 {
