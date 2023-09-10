@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csenand <csenand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: loulou <loulou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:45:33 by csenand           #+#    #+#             */
-/*   Updated: 2023/04/11 14:10:53 by csenand          ###   ########.fr       */
+/*   Updated: 2023/09/10 17:44:54 by loulou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	print_help(void)
 		"  ⬆		| Move up\n"
 		"  ⬇		| Move down\n"
 		"  <->		| Move left|right\n"
-		"  r		| change colors to "RED"red"WHT
-		"  g		| change colors to "GRN"green"WHT
-		"  b		| change colors to "BLU"blue"WHT
+		"  r		| change colors to "RED"red\n"WHT
+		"  g		| change colors to "GRN"green\n"WHT
+		"  b		| change colors to "BLU"blue\n"WHT
 		"  h		| Show help\n"
 		"  mouse wheel	| Zoom in and out\n");
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: csenand <csenand@student.42.fr>            +#+  +:+       +#+         #
+#    By: loulou <loulou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:52:46 by csenand           #+#    #+#              #
-#    Updated: 2023/04/11 15:36:11 by csenand          ###   ########.fr        #
+#    Updated: 2023/09/10 17:43:05 by loulou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,6 @@ LINUX 		= -ldl -lglfw -pthread -lm
 MAC 		= -I /include -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/" -pthread
 MAC_AIR 	= -I /include -lglfw -L "/opt/homebrew/Cellar/glfw/3.3.8/lib" -pthread
 
-# -- MLX42 LIB -- #
-MLX = ./lib/MLX42/build/libmlx42.a
 
 # -- REMOVE -- #
 RM = rm -rf
@@ -58,6 +56,10 @@ HEADER_DIR	=	./include/
 HEADER_LST	=	fractol.h
 HEADER	 	=	$(addprefix $(HEADER_DIR), $(HEADER_LST))
 
+# -- MLX42 Files -- #
+MLX42_DIR	=	./lib/MLX42
+MLX42		=	$(MLX42_DIR)/build/libmlx42.a
+
 # -- Colors -- #
 RESET		= 	\033[0m
 RED			= 	\033[0;31m
@@ -81,14 +83,20 @@ endif
 all : dir lib $(NAME) ./include/fractol.h
 
 # -- Compile library -- #
-$(NAME) : $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS) $(MLX) $(FLAGS) -o $(NAME)
+$(NAME) : $(MLX42) $(OBJS)
+	@$(CC) $(CFLAGS) $(SRCS) $(MLX42) $(FLAGS) -o $(NAME)
 	@echo "✅ $(GREEN)$(NAME)'s exectuable successfully created.		✅$(RESET)"
 
 # -- Create all files .o (object) from files .c (source code) -- #
 $(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(HEADER)
 	@printf "$(ERASE_LINE)🎛️  $(PURPLE)Compiling $(YELLOW)$(notdir $<)\r$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(MLX42):
+	@if [ ! -f "./libs/MLX42/build/libmlx42.a" ]; then \
+		cmake lib/MLX42 -B $(MLX42_DIR)/build &> /dev/null && make -C $(MLX42_DIR)/build -j4; \
+	fi
+	@echo "\n✅ $(GREEN)MLX42 successfully compiled.\t\t\t✅$(RESET)"
 
 # -- Create directory for *.o files -- #
 dir :
@@ -110,6 +118,7 @@ fclean : clean
 	@printf "💥 $(RED)Removing executable(s)...$(RESET)				💥\n"
 	@$(RM) $(LIBFT)
 	@$(RM) $(NAME)
+	@$(RM) $(MLX42_DIR)/build
 	@printf "🗑️  $(CYAN)Executable(s) and archive(s) successfully deleted.$(RESET)	🗑️\n"
 
 # -- Removes objects and executable then remakes all -- #
