@@ -6,7 +6,7 @@
 #    By: loulou <loulou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 11:52:46 by csenand           #+#    #+#              #
-#    Updated: 2023/09/10 17:43:05 by loulou           ###   ########.fr        #
+#    Updated: 2023/09/10 17:46:15 by loulou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ else ifeq ($(OS), Darwin)
 endif
 
 # -- Executable's creation -- #
-all : dir lib $(NAME) ./include/fractol.h
+all : dir $(NAME) ./include/fractol.h
 
 # -- Compile library -- #
 $(NAME) : $(MLX42) $(OBJS)
@@ -101,11 +101,6 @@ $(MLX42):
 # -- Create directory for *.o files -- #
 dir :
 	@mkdir -p $(OBJS_DIR)
-
-# -- Create MLX archive -- #
-lib:
-	@cmake lib/MLX42 -B lib/MLX42/build
-	@make -C lib/MLX42/build
 
 # -- Removes objects -- #
 clean :
